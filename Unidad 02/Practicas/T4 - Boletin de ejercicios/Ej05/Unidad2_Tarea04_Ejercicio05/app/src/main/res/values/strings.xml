@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Unidad2_Tarea04_Ejercicio01</string>
+    <string name="switch_noche">Noche</string>
+    <string name="imageView_paisaje">Mi Paisaje</string>
+    <string name="switch_dia">Dia</string>
+</resources>

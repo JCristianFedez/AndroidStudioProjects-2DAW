@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Unidad03_Tarea03_Ejercicio01</string>
+    <string name="tvNumDefault">0</string>
+    <string name="btnToast">Tostada</string>
+    <string name="btnSneekbar">Sneekbar</string>
+    <string name="btnDialog">Dialogo</string>
+</resources>

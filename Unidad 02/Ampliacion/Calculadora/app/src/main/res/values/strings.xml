@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">calculadora</string>
+    <string name="Porciento">%</string>
+    <string name="btnCe">CE</string>
+    <string name="btnC">C</string>
+    <string name="tvNumDefault">0</string>
+    <string name="btnDerivada">1/x</string>
+    <string name="btnPow">x²</string>
+    <string name="btnSqrt">√</string>
+    <string name="btnDivi">÷</string>
+    <string name="btnMulti">X</string>
+    <string name="btnResta">-</string>
+    <string name="btnSuma">+</string>
+    <string name="btnIgual">=</string>
+    <string name="btnComa">,</string>
+    <string name="btnCambiaSigno">±</string>
+    <string name="btnN7">7</string>
+    <string name="btnN0">0</string>
+    <string name="btnN8">8</string>
+    <string name="btnN9">9</string>
+    <string name="btnN4">4</string>
+    <string name="btnN5">5</string>
+    <string name="btnN6">6</string>
+    <string name="btnN1">1</string>
+    <string name="btnN2">2</string>
+    <string name="btnN3">3</string>
+    <string name="btnDelete">Elimina Ultimo Valor</string>
+    <string name="tvDefault"></string>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Unidad03_Tarea02_Ejercicio04</string>
+    <string name="tvDiaDefault">Ningun dia seleccionado</string>
+    <string name="rbLunes">Lunes</string>
+    <string name="rbMartes">Martes</string>
+    <string name="rbMiercoles">Miercoles</string>
+    <string name="rbJueves">Jueves</string>
+    <string name="rbViernes">Viernes</string>
+    <string name="rbSabado">Sabado</string>
+    <string name="rbDomingo">Domingo</string>
+</resources>

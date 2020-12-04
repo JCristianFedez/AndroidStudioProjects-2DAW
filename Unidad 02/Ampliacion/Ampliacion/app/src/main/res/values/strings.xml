@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Unidad02_Adicional_Ejercicio01</string>
+    <string name="tvTitle">LANZA DADOS</string>
+    <string name="tvDeslizTitle">Elige la cantidad de lanzamientos</string>
+    <string name="btnLanzar">Lanzar</string>
+    <string name="tvTirada">0</string>
+    <string name="tvNum1">1 :</string>
+    <string name="tvNum2">2 :</string>
+    <string name="tvNum3">3 :</string>
+    <string name="tvNum4">4 :</string>
+    <string name="tvNum5">5 :</string>
+    <string name="tvNum6">6 :</string>
+    <string name="tvMod">0</string>
+    <string name="tvCantTiradas">1</string>
+    <string name="ivDadoDescription">Dado</string>
+</resources>
