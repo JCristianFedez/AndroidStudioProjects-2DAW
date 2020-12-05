@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "UD2_4"
