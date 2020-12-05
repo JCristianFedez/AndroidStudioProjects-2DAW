@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Unidad2_Tarea04_Ejercicio04</string>
+    <string name="show_date">  /  /    </string>
+    <string name="edText_year">Año</string>
+</resources>

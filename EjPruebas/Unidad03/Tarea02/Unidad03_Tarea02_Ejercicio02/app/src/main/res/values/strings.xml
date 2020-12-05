@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Unidad03_Tarea02_Ejercicio01</string>
+    <string name="tvSample">Mi texto de prueba</string>
+    <string name="btnNext">Next</string>
+    <string name="btnBack">Back</string>
+    <string name="btnMod">Modificar</string>
+</resources>

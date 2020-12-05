@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Unidad2_Tarea04_Ejercicio01</string>
+    <string name="hola_button">Hola</string>
+    <string name="adios_button">Adios</string>
+    <string name="texto_sustituir">Texto para sustituir</string>
+</resources>

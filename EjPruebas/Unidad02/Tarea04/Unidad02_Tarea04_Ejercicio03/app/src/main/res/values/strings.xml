@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Unidad2_Tarea04_Ejercicio03</string>
+    <string name="num1">Primer Numero</string>
+    <string name="num2">Segundo Numero</string>
+    <string name="button_Calc">Calcular</string>
+    <string name="r_btn_suma">Sumar</string>
+    <string name="r_btn_resta">Restar</string>
+    <string name="r_btn_multiplicacion">Multiplicar</string>
+    <string name="r_btn_division">Dividir</string>
+</resources>
