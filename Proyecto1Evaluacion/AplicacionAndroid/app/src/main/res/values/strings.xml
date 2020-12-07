@@ -1,7 +1,0 @@
-<resources>
-    <string name="app_name">AplicacionAndroid1Evaluacion</string>
-    <string name="ivLogo">Logo</string>
-    <string name="tvTitle">Bienvenido a mi APP</string>
-    <string name="btnAlta">Alta Usuario</string>
-    <string name="ivPet">Pet</string>
-</resources>
