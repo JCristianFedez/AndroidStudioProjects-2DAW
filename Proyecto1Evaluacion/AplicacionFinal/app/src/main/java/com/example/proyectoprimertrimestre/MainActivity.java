@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnAlta:
                 Intent intent = new Intent(this, AltaUsuario.class);
-                finish(); //Cierro este activity y entro al alta
+//                finish(); //Cierro este activity y entro al alta
                 startActivity(intent);
                 break;
 

@@ -4,15 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".AltaUsuario">
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:gravity="center"
+        android:textColor="#0C1755"
+        android:text="@string/tvTitle"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
+        app:layout_constraintEnd_toStartOf="@+id/ivLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivLogo" />
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
 
         <LinearLayout
             android:id="@+id/form"
@@ -114,6 +138,7 @@
                     android:textSize="20sp" />
 
                 <RadioGroup
+                    android:id="@+id/rgSexo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -143,7 +168,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tvIntereses"
+                android:id="@+id/tvInteresesOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_gravity="center"
@@ -159,28 +184,28 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cbEstudio"
+                    android:id="@+id/cbCine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="@string/cbEstudiante" />
+                    android:text="@string/cbCine" />
 
                 <CheckBox
-                    android:id="@+id/cbTrabajador"
+                    android:id="@+id/cbArte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="@string/cbTranajador" />
+                    android:text="@string/cbArte" />
 
                 <CheckBox
-                    android:id="@+id/cbAutonomo"
+                    android:id="@+id/cbDeporte"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:text="@string/cbAutonomo" />
+                    android:text="@string/cbDeportes" />
 
             </LinearLayout>
 
@@ -193,7 +218,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btnBack"
+                    android:id="@+id/btnBackToInicio"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -201,7 +226,7 @@
                     android:text="@string/btnBack" />
 
                 <Button
-                    android:id="@+id/btnEnviar"
+                    android:id="@+id/btnEnviarDatos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"

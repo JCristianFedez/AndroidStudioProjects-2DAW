@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <ImageView
@@ -23,7 +24,8 @@
         android:layout_marginStart="60dp"
         android:gravity="center"
         android:text="@string/tvTitle"
-        android:textSize="18sp"
+        android:textColor="#0C1755"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
         app:layout_constraintEnd_toStartOf="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,11 +35,12 @@
         android:id="@+id/ivPet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/ivPet"
         app:layout_constraintBottom_toTopOf="@+id/btnAlta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:layout_constraintTop_toBottomOf="@+id/tvWelcome"
         app:srcCompat="@drawable/mascota" />
 
     <Button
@@ -49,5 +52,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/tvWelcome"
+        android:textColor="#FF0C1755"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">ProyectoPrimerTrimestre</string>
-    <string name="tvTitle">Bienvenido a mi APP</string>
+    <string name="tvTitle">The Funny Bunny</string>
     <string name="ivLogo">Logo</string>
     <string name="btnAlta">Alta Usuario</string>
     <string name="ivPet">Pet</string>
@@ -16,7 +16,8 @@
     <string name="rbHombre">Hombre</string>
     <string name="rbMujer">Mujer</string>
     <string name="btnEnviar">Enviar</string>
-    <string name="cbEstudiante">Estudiante</string>
-    <string name="cbTranajador">Trabajador</string>
-    <string name="cbAutonomo">Autonomo</string>
+    <string name="cbCine">Cine</string>
+    <string name="cbDeportes">Deportes</string>
+    <string name="cbArte">Arte</string>
+    <string name="tvWelcome">Bienvenido a mi App</string>
 </resources>
