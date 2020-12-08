@@ -25,6 +25,7 @@
         android:text="@string/tvTitle"
         android:textColor="#0C1755"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
         app:layout_constraintEnd_toStartOf="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +121,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="@string/btnBack" />
+                    android:text="@string/btnBack"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp"/>
 
                 <Button
                     android:id="@+id/btnEnviarValoracion"
@@ -128,7 +131,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="@string/btnEnviar" />
+                    android:text="@string/btnEnviar"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

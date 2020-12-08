@@ -51,12 +51,12 @@ public class DatosUsuarios extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Datos no recibidos", Toast.LENGTH_SHORT).show();
             return;
         }else{
-            //SE crea un alumno nuevo con los datos enviados en gson
+            //SE crea un usuario nuevo con los datos enviados en gson
             Usuario user=gson.fromJson(getIntent().getStringExtra("datos"),Usuario.class);
 
             tvNameYApell.setText("Nombre: "+user.getNombre()+", "+user.getApellidos());
             tvTelefono.setText("Tfn: "+String.valueOf(user.getTelefono()));
-            tvEmail.setText("Email"+user.getEmail());
+            tvEmail.setText("Email: "+user.getEmail());
             tvDireccion.setText("Adress: "+user.getDireccion());
             tvFechaNacimiento.setText("Nacimiento: "+user.getDireccion());
             tvSexo.setText("Sexo: "+user.getSexo());
@@ -81,28 +81,5 @@ public class DatosUsuarios extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
-
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode==CODIGO_CREAR){
-//            if(resultCode==RESULT_OK && data.hasExtra("datos")){
-//                //SE crea un alumno nuevo con los datos enviados en gson
-//                Usuario user=gson.fromJson(data.getStringExtra("datos"),Usuario.class);
-//
-//                tvNameYApell.setText(user.getNombre()+", "+user.getApellidos());
-//                tvTelefono.setText(String.valueOf(user.getTelefono()));
-//                tvEmail.setText(user.getEmail());
-//                tvDireccion.setText(user.getDireccion());
-//                tvFechaNacimiento.setText(user.getDireccion());
-//                tvSexo.setText(user.getSexo());
-//                tvIntereses.setText(user.getIntereses());
-//
-//                Toast.makeText(this, "Usuario Creado", Toast.LENGTH_SHORT).show();
-//            }else {
-//                Toast.makeText(this, "Proceso de inserción cancelado", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//    }
 
 }

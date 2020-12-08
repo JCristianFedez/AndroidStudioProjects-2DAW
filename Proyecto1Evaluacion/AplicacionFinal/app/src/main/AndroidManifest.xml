@@ -12,7 +12,7 @@
         <activity android:name=".DatosUsuarios"></activity>
         <activity
             android:name=".AltaUsuario"
-            android:screenOrientation="portrait" />
+/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

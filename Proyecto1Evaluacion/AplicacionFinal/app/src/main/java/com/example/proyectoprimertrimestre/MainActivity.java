@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnAlta;
     private ImageView ivPet;
     private boolean rotate = false;
+    private final int DURATION = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,24 +41,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.ivPet:
+                //Lo desactivo para que no se pueda pulsar mientra hace la animacion
+                ivPet.setEnabled(false);
+
                 RotateAnimation animacionRotar;
                 if (rotate) {//Si  esta rotada la giro de 180 Grados a 360
-                    rotate =!rotate;
+                    rotate = !rotate;
                     animacionRotar = new RotateAnimation(180, 360,
                             RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                             RotateAnimation.RELATIVE_TO_SELF, 0.5f);
 
                 } else {//Si no esta rotada la giro de 0 a 180 grados
-                    rotate =! rotate;
+                    rotate = !rotate;
                     animacionRotar = new RotateAnimation(0, 180,
                             RotateAnimation.RELATIVE_TO_SELF, 0.5f,
                             RotateAnimation.RELATIVE_TO_SELF, 0.5f);
                 }
-                animacionRotar.setDuration(2000);
+                animacionRotar.setDuration(DURATION);
                 animacionRotar.setFillAfter(true);
-                v.startAnimation(animacionRotar);
+                ivPet.startAnimation(animacionRotar);
                 //animation.setRepeatCount(Animation.INFINITE);
                 //animation.setRepeatMode(Animation.REVERSE);
+
+                //Luego de terminar la animacion se vuelve a activar
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ivPet.setEnabled(true);
+
+                    }
+                }, DURATION);
                 break;
         }
     }

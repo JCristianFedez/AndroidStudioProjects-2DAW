@@ -21,9 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="60dp"
         android:gravity="center"
-        android:textColor="#0C1755"
         android:text="@string/tvTitle"
+        android:textColor="#0C1755"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
         app:layout_constraintEnd_toStartOf="@+id/ivLogo"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,10 +53,13 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:ems="10"
                 android:hint="@string/etNombre"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:shadowColor="#FFFFFF" />
 
             <EditText
                 android:id="@+id/etApellidos"
@@ -64,10 +68,12 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:ems="10"
                 android:hint="@string/etApellidos"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/etTelefono"
@@ -76,10 +82,12 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:ems="10"
                 android:hint="@string/etTelefono"
                 android:importantForAutofill="no"
-                android:inputType="number" />
+                android:inputType="number"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/etEmail"
@@ -88,10 +96,12 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:ems="10"
                 android:hint="@string/etEmail"
                 android:importantForAutofill="no"
-                android:inputType="textVisiblePassword|textPersonName" />
+                android:inputType="textVisiblePassword|textPersonName"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/etDireccion"
@@ -100,10 +110,12 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:ems="10"
                 android:hint="@string/etDireccion"
                 android:importantForAutofill="no"
-                android:inputType="textVisiblePassword|textPersonName" />
+                android:inputType="textVisiblePassword|textPersonName"
+                android:padding="10dp" />
 
             <EditText
                 android:id="@+id/etFechaNacimiento"
@@ -112,13 +124,15 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:background="@android:drawable/editbox_background_normal"
                 android:clickable="true"
                 android:ems="10"
                 android:focusable="false"
                 android:hint="@string/etFechaNacimiento"
                 android:importantForAutofill="no"
                 android:inputType="date"
-                android:maxLines="1" />
+                android:maxLines="1"
+                android:padding="10dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,6 +149,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="5dp"
                     android:text="@string/tvSexo"
+                    android:textColor="#0C1755"
                     android:textSize="20sp" />
 
                 <RadioGroup
@@ -176,6 +191,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:text="@string/tvIntereses"
+                android:textColor="#0C1755"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -223,7 +239,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="@string/btnBack" />
+                    android:text="@string/btnBack"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp" />
+
 
                 <Button
                     android:id="@+id/btnEnviarDatos"
@@ -231,7 +250,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:text="@string/btnEnviar" />
+                    android:text="@string/btnEnviar"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp" />
             </LinearLayout>
 
         </LinearLayout>
