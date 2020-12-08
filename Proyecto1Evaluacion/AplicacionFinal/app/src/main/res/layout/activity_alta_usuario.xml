@@ -57,9 +57,11 @@
                 android:ems="10"
                 android:hint="@string/etNombre"
                 android:importantForAutofill="no"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:padding="10dp"
                 android:shadowColor="#FFFFFF" />
+
+<!-- No permitir numeros           android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
 
             <EditText
                 android:id="@+id/etApellidos"
