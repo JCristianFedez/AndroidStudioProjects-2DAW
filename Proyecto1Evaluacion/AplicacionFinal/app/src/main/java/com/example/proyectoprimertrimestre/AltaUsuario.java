@@ -115,7 +115,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
 
                 //Instancio nuevo Usuario
                 Usuario user=new Usuario(etNombre.getText().toString(),
-                        etNombre.getText().toString(),
+                        etApellidos.getText().toString(),
                         etEmail.getText().toString(),
                         Integer.parseInt(etTelefono.getText().toString()),
                         etDireccion.getText().toString(),
@@ -127,10 +127,10 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
                 String cadenaUser=gson.toJson(user);
 
                 //Envio el usuario
-                Intent enviar = new Intent(this,DatosUsuarios.class);
+                Intent enviar = new Intent(this,MainActivity.class);
                 enviar.putExtra("datos",cadenaUser);
                 startActivity(enviar);
-                finish();
+                //finish();
                 break;
         }
     }

@@ -20,4 +20,8 @@
     <string name="cbDeportes">Deportes</string>
     <string name="cbArte">Arte</string>
     <string name="tvWelcome">Bienvenido a mi App</string>
+    <string name="btnCalcular">Calcular</string>
+    <string name="tvEdad">"Edad: 0"</string>
+    <string name="tvMinSekbar">16</string>
+    <string name="tvMaxSeekbar">99</string>
 </resources>
