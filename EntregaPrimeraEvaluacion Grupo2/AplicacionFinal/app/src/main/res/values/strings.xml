@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">ProyectoPrimerTrimestre</string>
+    <string name="tvTitle">The Funny Bunny</string>
+    <string name="ivLogo">Logo</string>
+    <string name="btnAlta">Alta Usuario</string>
+    <string name="ivPet">Pet</string>
+    <string name="btnBack">Volver</string>
+    <string name="etNombre">Nombre</string>
+    <string name="etApellidos">Apellidos</string>
+    <string name="etTelefono">Telefono</string>
+    <string name="etEmail">Email</string>
+    <string name="etDireccion">Direccion</string>
+    <string name="tvSexo">Sexo</string>
+    <string name="etFechaNacimiento">Fecha de Nacimiento</string>
+    <string name="tvIntereses">Intereses</string>
+    <string name="rbHombre">Hombre</string>
+    <string name="rbMujer">Mujer</string>
+    <string name="btnEnviar">Enviar</string>
+    <string name="cbCine">Cine</string>
+    <string name="cbDeportes">Deportes</string>
+    <string name="cbArte">Arte</string>
+    <string name="tvWelcome">Bienvenido a mi App</string>
+    <string name="btnCalcular">Calcular</string>
+    <string name="tvEdad">"Edad: 0"</string>
+    <string name="tvMinSekbar">16</string>
+    <string name="tvMaxSeekbar">99</string>
+    <string name="tvSugerencia">Que tres palabras te definirian</string>
+    <string name="etSug1">1ª Sugerencia</string>
+    <string name="etSug2">2ª Sugerencia</string>
+    <string name="etSug3">3ª Sugerencia</string>
+    <string name="btnSug">Obtener Sugerencia</string>
+    <string name="btnVerDatos">Ver Datos</string>
+</resources>

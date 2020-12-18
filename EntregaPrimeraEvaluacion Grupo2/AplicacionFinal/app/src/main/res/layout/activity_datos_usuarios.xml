@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context=".DatosUsuarios">
+
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:contentDescription="@string/ivLogo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:gravity="center"
+        android:text="@string/tvTitle"
+        android:textColor="#0C1755"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLogo"
+        app:layout_constraintEnd_toStartOf="@+id/ivLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivLogo" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+
+        <LinearLayout
+            android:id="@+id/linearLayLista"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvNameYApell"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/etNombre"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/etTelefono"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/etEmail"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/etDireccion"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvFechaNacimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/etFechaNacimiento"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvSexo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/tvSexo"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tvIntereses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:text="@string/tvIntereses"
+                android:textSize="18sp" />
+
+            <RatingBar
+                android:id="@+id/rbValoracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:numStars="5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnBacktoForm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btnBack"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp"/>
+
+                <Button
+                    android:id="@+id/btnEnviarValoracion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:text="@string/btnEnviar"
+                    android:backgroundTint="#008A53"
+                    app:cornerRadius="15dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tvSugerencia"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/etSug1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:hint="@string/etSug1"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:shadowColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/etSug2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:hint="@string/etSug2"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:shadowColor="#FFFFFF" />
+
+                <EditText
+                    android:id="@+id/etSug3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:drawable/editbox_background_normal"
+                    android:ems="10"
+                    android:hint="@string/etSug3"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:shadowColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/btnSug"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#008A53"
+                    android:text="@string/btnSug"
+                    app:cornerRadius="15dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
