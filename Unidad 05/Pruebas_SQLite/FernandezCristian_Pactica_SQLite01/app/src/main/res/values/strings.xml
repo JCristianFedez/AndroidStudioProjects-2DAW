@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">FernandezCristian_Practica_SQLite01</string>
+    <string name="tvCodigo">Codigo</string>
+    <string name="tvNombre">Nombre</string>
+    <string name="btnInsertar">Insert</string>
+    <string name="btnAct">Act</string>
+    <string name="btnDel">Delete</string>
+    <string name="btnBack">Volver</string>
+</resources>
