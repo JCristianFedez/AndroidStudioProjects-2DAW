@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnInsert;
     private Button btnDelete;
     private Button btnUpdate;
+    private Button btnBuscar;
     private EditText etName;
     private EditText etCode;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInsert = (Button) findViewById(R.id.btnInsertar);
         btnDelete = (Button) findViewById(R.id.btnDel);
         btnUpdate = (Button) findViewById(R.id.btnAct);
+        btnBuscar = (Button) findViewById(R.id.btnConsulta);
 
         etCode = (EditText) findViewById(R.id.etCodigo);
         etName = (EditText) findViewById(R.id.etNombre);
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnInsert.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
+        btnBuscar.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnDel:
                 action="delete";
                 break;
+            case R.id.btnConsulta:
+                action="buscar";
         }
         intent.putExtra("action",action);
         intent.putExtra("code",code);

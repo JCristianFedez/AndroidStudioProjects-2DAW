@@ -6,4 +6,6 @@
     <string name="btnAct">Act</string>
     <string name="btnDel">Delete</string>
     <string name="btnBack">Volver</string>
+    <string name="btnBuscarAlumno">Buscar</string>
+    <string name="btnVolver">Volver</string>
 </resources>
