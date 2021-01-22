@@ -49,18 +49,20 @@ public class AndroidBaseDatos extends AppCompatActivity implements View.OnClickL
 
         if (db != null) {
             Cursor c;
+            String[] args;
             switch (action) {
                 case "insert":
                     if (nombre.length() > 0 && codigo.length() > 0) {
-                        c = db.rawQuery("SELECT codigo, nombre FROM Alumnos", null);
+                        args = new String[]{codigo};
+                        c = db.rawQuery(" SELECT * FROM Alumnos WHERE codigo=? ", args);
 
-                        if(c.getCount()==0){
+                        if (c.getCount() == 0) {
                             querry.put("codigo", codigo);
                             querry.put("nombre", nombre);
                             db.insert("Alumnos", null, querry);
                             Toast.makeText(getApplicationContext(), "Alumno " + nombre + " añadido", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "Codigo " + codigo+" ya existente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Codigo " + codigo + " ya existente", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -70,36 +72,52 @@ public class AndroidBaseDatos extends AppCompatActivity implements View.OnClickL
                     break;
 
                 case "upload":
-                    if (nombre.length() > 0 && codigo.length() > 0) {
-                        querry.put("nombre", nombre);
-                        db.update("Alumnos", querry, "codigo=" + codigo, null);
-                        Toast.makeText(getApplicationContext(), "Alumno " + nombre + " actualizado", Toast.LENGTH_SHORT).show();
+                    args = new String[]{codigo};
+                    c = db.rawQuery(" SELECT * FROM Alumnos WHERE codigo=? ", args);
+
+                    if (c.getCount() != 0) {
+                        if (nombre.length() > 0 && codigo.length() > 0) {
+                            querry.put("nombre", nombre);
+                            db.update("Alumnos", querry, "codigo=" + codigo, null);
+                            Toast.makeText(getApplicationContext(), "Alumno " + nombre + " actualizado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Falto introducir nombre o codigo", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getApplicationContext(), "Falto introducir nombre o codigo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Alumno no existente", Toast.LENGTH_SHORT).show();
                     }
+
                     break;
 
                 case "delete":
-                    if (codigo.length() > 0) {
-                        db.delete("Alumnos", "codigo=" + codigo, null);
-                        Toast.makeText(getApplicationContext(), "Alumno con codigo " + codigo + " eliminado", Toast.LENGTH_SHORT).show();
+                    args = new String[]{codigo};
+                    c = db.rawQuery(" SELECT * FROM Alumnos WHERE codigo=? ", args);
+
+                    if (c.getCount() != 0) {
+                        if (codigo.length() > 0) {
+                            db.delete("Alumnos", "codigo=" + codigo, null);
+                            Toast.makeText(getApplicationContext(), "Alumno con codigo " + codigo + " eliminado", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Falto introducir codigo", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getApplicationContext(), "Falto introducir codigo", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Alumno no existente", Toast.LENGTH_SHORT).show();
                     }
+
                     break;
                 case "buscar":
                     tvResultado.setText("");
 
                     if (codigo.length() > 0 && nombre.length() > 0) {
-                        String[] args = new String[]{codigo, nombre};
+                        args = new String[]{codigo, nombre};
                         c = db.rawQuery(" SELECT * FROM Alumnos WHERE codigo=? AND nombre=?", args);
 
                     } else if (codigo.length() > 0) {
-                        String[] args = new String[]{codigo};
+                        args = new String[]{codigo};
                         c = db.rawQuery(" SELECT * FROM Alumnos WHERE codigo=? ", args);
 
                     } else if (nombre.length() > 0) {
-                        String[] args = new String[]{nombre};
+                        args = new String[]{nombre};
                         c = db.rawQuery(" SELECT * FROM Alumnos WHERE nombre=? ", args);
 
                     } else {
@@ -115,7 +133,7 @@ public class AndroidBaseDatos extends AppCompatActivity implements View.OnClickL
                         } while (c.moveToNext());
                     }
 
-                    if(tvResultado.getText().toString()==""){
+                    if (tvResultado.getText().toString() == "") {
                         tvResultado.setText("No hay resultados de su busqueda");
                     }
                     break;
