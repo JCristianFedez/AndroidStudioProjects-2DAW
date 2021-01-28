@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Ej04-MenuYSubmenu</string>
+    <string name="menu_item1">Item-1</string>
+    <string name="menu_item2">Item-2</string>
+    <string name="menu_item3">Item-3</string>
+    <string name="menu_item4">Item-4</string>
+    <string name="menu_item5">Item-5</string>
+    <string name="subitem3_1">SubItem 3-1</string>
+    <string name="subitem3_2">SubItem 3-2</string>
+    <string name="subitem3_3">SubItem 3-3</string>
+    <string name="tv_menu_xml">Menu Creado con XML</string>
+    <string name="btnMenuXML">Menu Con Java</string>
+    <string name="tv_menu_java">Menu Creado con JAVA</string>
+    <string name="btnMenuJava">Menu Con XML</string>
+
+</resources>
