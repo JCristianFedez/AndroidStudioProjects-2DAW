@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ListView Personalizado</string>
+    <string name="lvTitle">CFGS - Desarrollo de Aplicaciones Web</string>
+    <string name="ivIcono">Icono</string>
+</resources>
