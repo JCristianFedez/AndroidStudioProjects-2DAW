@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <ImageView
+        android:id="@+id/iv_ciudad_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/detalleString"
+        android:scaleType="centerCrop"
+        app:srcCompat="@color/accentColor" />
+
+    <TextView
+        android:id="@+id/tv_ciudad_detalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:background="#99605D5D"
+        android:padding="16dp"
+        android:text="@string/examleText"
+        android:maxLines="1"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</FrameLayout>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_primero">GridView Personalizado</string>
+    <string name="app_segundo">Imagen detallada</string>
+    <string name="detalleString">Detalle ciudad</string>
+    <string name="examleText">Texto Ejemplo</string>
+
+</resources>
