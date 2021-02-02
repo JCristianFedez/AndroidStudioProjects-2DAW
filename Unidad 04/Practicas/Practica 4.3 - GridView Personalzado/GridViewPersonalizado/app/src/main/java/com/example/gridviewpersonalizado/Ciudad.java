@@ -4,7 +4,7 @@ import android.widget.BaseAdapter;
 
 import java.io.Serializable;
 
-public class Ciudad {
+public class Ciudad implements Serializable{
 
     private String nombre;
     private Integer id;

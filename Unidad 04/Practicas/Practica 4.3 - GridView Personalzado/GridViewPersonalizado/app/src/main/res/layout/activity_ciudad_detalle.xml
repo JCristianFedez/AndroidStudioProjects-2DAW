@@ -5,21 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CiudadDetalle"
-    android:id="@+id/ciudad_detalle"
-    android:padding="16dp">
+    android:id="@+id/ciudad_detalle">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/detalleString"
+        android:scaleType="fitXY"
         app:srcCompat="@color/accentColor" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
+        android:layout_gravity="center|bottom"
         android:background="#99605D5D"
         android:padding="16dp"
         android:text="@string/examleText"

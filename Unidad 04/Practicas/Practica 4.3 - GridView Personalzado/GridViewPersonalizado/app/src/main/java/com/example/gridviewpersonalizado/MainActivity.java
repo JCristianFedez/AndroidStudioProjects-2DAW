@@ -2,11 +2,15 @@ package com.example.gridviewpersonalizado;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,6 +26,17 @@ public class MainActivity extends AppCompatActivity {
 
         adaptador = new AdaptadorDeCiudades(this, GetArrayItems());
         grid.setAdapter(adaptador);
+
+        grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Ciudad obj = (Ciudad) parent.getItemAtPosition(position);
+
+                Intent paso = new Intent(getApplicationContext(),CiudadDetalle.class);
+                paso.putExtra("Objeto",(Serializable) obj);
+                startActivity(paso);
+            }
+        });
     }
 
     private ArrayList<Ciudad> GetArrayItems(){
