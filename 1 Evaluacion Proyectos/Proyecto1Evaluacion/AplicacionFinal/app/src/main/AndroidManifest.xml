@@ -10,9 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoPrimerTrimestre">
         <activity android:name=".DatosUsuarios"></activity>
-        <activity
-            android:name=".AltaUsuario"
-/>
+        <activity android:name=".AltaUsuario"
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
