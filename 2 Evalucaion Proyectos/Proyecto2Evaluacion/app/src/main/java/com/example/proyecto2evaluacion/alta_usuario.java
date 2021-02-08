@@ -36,6 +36,8 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
     private SQLiteDatabase db;
     private ContentValues querry;
 
+    //TODO: Recojer imagen al pulsar el boton y guardarla
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,10 +68,10 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
     }
 
     public void insertarUsuario() {
-        UsuarioSQLiteHelper aldbh =
-                new UsuarioSQLiteHelper(this, "DBUsuario", null, 1);
+        ProyectoSQLiteHelper prdbh =
+                new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
 
-        db = aldbh.getWritableDatabase();
+        db = prdbh.getWritableDatabase();
 
         querry = new ContentValues();
 
@@ -94,8 +96,8 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
                 } else {
                     int perfil = (rbPerfilSeleccionado.getText().toString().equals("Admin")) ? 1 : 0;
                     args = new String[]{etDni.getText().toString()};
-                    c = db.rawQuery(" SELECT * FROM " + TABLE_NAME + " WHERE dni=? ", args);
-
+                    c = db.rawQuery(" SELECT * FROM " + TABLE_NAME + " WHERE "+USER_DNI+"=? ", args);
+                    int a = c.getCount();
                     if (c.getCount() == 0) {
                         querry.put(USER_DNI, etDni.getText().toString());
                         querry.put(USER_NOM, etNombre.getText().toString());

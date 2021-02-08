@@ -15,9 +15,22 @@ import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class alta_incidencia extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TABLE_NAME = "incidencia";
+    private static final String USER_TABLE_NAME = "usuario";
+    private static final String USER_DNI = "dni";
+    private static final String USER_NOM = "nombre";
+    private static final String USER_AP = "apellidos";
+    private static final String USER_US = "usuari";
+    private static final String USER_PASS = "password";
+    private static final String USER_PERFIL = "perfil";
+    private static final String USER_FOTO = "foto";
+
+    private static final String INC_TABLE_NAME = "incidencia";
     private static final String INC_DNI = "dni";
     private static final String INC_FECHA_INICIO = "fecha_inicio";
     private static final String INC_OBSER = "observacion";
@@ -25,8 +38,7 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
     private static final String INC_ESTADO = "estado";
     private static final String INC_FECHA_FIN = "fecha_resolucion";
 
-    private SQLiteDatabase dbUsuario;
-    private SQLiteDatabase dbIncidencia;
+    private SQLiteDatabase db;
     private ContentValues querry;
 
     private EditText etDniIncidencia;
@@ -42,7 +54,6 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alta_incidencia);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 
         etDniIncidencia = (EditText) findViewById(R.id.etDniIncidencia);
@@ -77,73 +88,98 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
     }
 
     public void insertarIncidencia(View v) {
-        //TODO: No permitir que la fecha de fin sea menor a la fecha de inicio
-        UsuarioSQLiteHelper indbh = new UsuarioSQLiteHelper(this, "DBUsuario", null, 1);
-        dbUsuario = indbh.getWritableDatabase();
-
-        IncidenciaSQLiteHelper usdbh = new IncidenciaSQLiteHelper(this, "DBIncidencia", null, 1);
-        dbIncidencia = usdbh.getWritableDatabase();
+        ProyectoSQLiteHelper prdbh = new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
+        db = prdbh.getWritableDatabase();
 
         querry = new ContentValues();
 
-        if (dbIncidencia != null && dbUsuario != null) {
+        if (db != null) {
             Cursor c;
             String[] args;
             Snackbar snackbar;
 
-            if (cbResuelta.isChecked() && etFechaFin.getText().toString().equals("")) {
 
-                snackbar = Snackbar.make(v, "Completa los datos", Snackbar.LENGTH_LONG);
-                snackbar.show();
-
-            } else if (!cbResuelta.isChecked() && !etFechaFin.getText().toString().equals("")) {
+            //Si tiene fecha de fin pero no esta resuelta
+            if (!cbResuelta.isChecked() && !etFechaFin.getText().toString().equals("")) {
                 snackbar = Snackbar.make(v, "Datos invalidos, no puede estar no resuelta y tener fecha fin", Snackbar.LENGTH_LONG);
                 snackbar.show();
+                db.close();
+                return;
+            }
 
-            } else if (etDniIncidencia.getText().toString().trim().equals("") ||
+            // Si esta resuelta pero no tiene fecha de fin
+            if (cbResuelta.isChecked() && etFechaFin.getText().toString().equals("")) {
+                snackbar = Snackbar.make(v, "Completa los datos", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                db.close();
+                return;
+            }
+
+            // Compruebo que la fecha de fin sea posterior a la de inicio
+            if(!etFechaInicio.getText().toString().trim().equals("") && !etFechaFin.getText().toString().trim().equals("")){
+                SimpleDateFormat formatEntrada = new SimpleDateFormat("dd/MM/yyyy");
+
+                try {
+                    Date inicio = formatEntrada.parse(etFechaInicio.getText().toString());
+                    Date fin = formatEntrada.parse(etFechaFin.getText().toString());
+                    if(inicio.after(fin)){
+                        snackbar = Snackbar.make(v, "La fecha de fin debe ser posterior a la de inicio", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                        db.close();
+                        return;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            //Obligar a introducir todos los datos
+            if (etDniIncidencia.getText().toString().trim().equals("") ||
                     etFechaInicio.getText().toString().trim().equals("") ||
                     etObservaciones.getText().toString().trim().equals("") ||
                     etDniResponsable.getText().toString().trim().equals("")) {
-                //Obligar a introducir todos los datos
                 snackbar = Snackbar.make(v, "Completa los datos", Snackbar.LENGTH_LONG);
                 snackbar.show();
-            } else {
-
-                args = new String[]{etDniResponsable.getText().toString()};
-                c = dbUsuario.rawQuery(" SELECT * FROM usuario WHERE dni=? ", args);
-                if (c.getCount() == 0) {
-                    //Compruebo que el responsable existe
-                    snackbar = Snackbar.make(v, "Rsponsable con DNI   " + etDniResponsable.getText().toString() + " no existente", Snackbar.LENGTH_LONG);
-                    snackbar.show();
-                } else {
-
-                    args = new String[]{etDniIncidencia.getText().toString()};
-                    c = dbIncidencia.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE dni=? ", args);
-                    if (c.getCount() != 0) {
-                        //Compruebo que el DNI de la incidencia no existe
-                        snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " ya existente", Snackbar.LENGTH_LONG);
-                        snackbar.show();
-
-                    } else {
-
-                        int resuelta = (cbResuelta.isChecked()) ? 1 : 0;
-                        querry.put(INC_DNI, etDniIncidencia.getText().toString());
-                        querry.put(INC_FECHA_INICIO, etFechaInicio.getText().toString());
-                        querry.put(INC_FECHA_FIN, etFechaFin.getText().toString());
-                        querry.put(INC_OBSER, etObservaciones.getText().toString());
-                        querry.put(INC_RESPONSABLE, etDniResponsable.getText().toString());
-                        querry.put(INC_ESTADO, resuelta);
-                        dbIncidencia.insert(TABLE_NAME, null, querry);
-                        snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " añadido", Snackbar.LENGTH_LONG);
-                        snackbar.show();
-
-                        vaciarEditText();
-                    }
-                }
-                c.close();
+                db.close();
+                return;
             }
-            dbIncidencia.close();
-            dbUsuario.close();
+
+            //Compruebo que el responsable existe
+            args = new String[]{etDniResponsable.getText().toString()};
+            c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
+            if (c.getCount() == 0) {
+                snackbar = Snackbar.make(v, "Rsponsable con DNI   " + etDniResponsable.getText().toString() + " no existente", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                db.close();
+                c.close();
+                return;
+            }
+
+            //Compruebo que el DNI de la incidencia no existe
+            args = new String[]{etDniIncidencia.getText().toString()};
+            c = db.rawQuery("SELECT * FROM " + INC_TABLE_NAME + " WHERE " + INC_DNI + "=? ", args);
+            if (c.getCount() != 0) {
+                snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " ya existente", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                db.close();
+                c.close();
+                return;
+            }
+
+            int resuelta = (cbResuelta.isChecked()) ? 1 : 0;
+            querry.put(INC_DNI, etDniIncidencia.getText().toString());
+            querry.put(INC_FECHA_INICIO, etFechaInicio.getText().toString());
+            querry.put(INC_FECHA_FIN, etFechaFin.getText().toString());
+            querry.put(INC_OBSER, etObservaciones.getText().toString());
+            querry.put(INC_RESPONSABLE, etDniResponsable.getText().toString());
+            querry.put(INC_ESTADO, resuelta);
+            db.insert(INC_TABLE_NAME, null, querry);
+            snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " añadido", Snackbar.LENGTH_LONG);
+            snackbar.show();
+            vaciarEditText();
+            c.close();
+            db.close();
         }
 
     }
