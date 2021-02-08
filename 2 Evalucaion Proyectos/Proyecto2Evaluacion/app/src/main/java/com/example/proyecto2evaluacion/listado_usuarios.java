@@ -61,6 +61,7 @@ public class listado_usuarios extends AppCompatActivity {
                     String admin = (perfil==1)?"Administrador":"Usuario";
                     tvListadoUsuarios.append(" " + dni + " - " + nombre + " - " + admin +"\n");
                 }while(c.moveToNext());
+                tvListadoUsuarios.append("\n\n");
             }
 
             if(tvListadoUsuarios.getText().toString() == ""){

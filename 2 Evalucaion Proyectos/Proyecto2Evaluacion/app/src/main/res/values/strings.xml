@@ -20,4 +20,6 @@
     <string name="cbResuelta">Resuelta</string>
     <string name="tvResuelta">Marque si la incidencia esta resuelta</string>
     <string name="btnElegirImagen">Seleccione imagen</string>
+    <string name="etFiltroFecha">Fecha</string>
+    <string name="btnFiltroIncidencia">Filtrar</string>
 </resources>

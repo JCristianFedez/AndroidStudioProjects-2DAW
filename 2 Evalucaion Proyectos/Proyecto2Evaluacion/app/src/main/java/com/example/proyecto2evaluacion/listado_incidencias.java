@@ -2,12 +2,17 @@ package com.example.proyecto2evaluacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class listado_incidencias extends AppCompatActivity {
+
+    //TODO: APLICAR FILTROS
 
     private SQLiteDatabase db;
     private TextView tvListadoIncidencias;
@@ -61,6 +66,7 @@ public class listado_incidencias extends AppCompatActivity {
                             "DNI: "+inc_dni+" | Fecha: "+fecha+" | Estado: "+estado+" | Responsable: "+responsable+"\n"
                     );
                 }while(c.moveToNext());
+                tvListadoIncidencias.append("\n\n");
             }
 
             if(tvListadoIncidencias.getText().toString() == ""){
@@ -69,6 +75,22 @@ public class listado_incidencias extends AppCompatActivity {
 
             db.close();
         }
+    }
+
+    private void showDatePickerDialog(final EditText editText) {
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                final String selectedDate = twoDigits(day) + "/" + twoDigits(month + 1) + "/" + year;
+                editText.setText(selectedDate);
+            }
+        });
+
+        newFragment.show(this.getSupportFragmentManager(), "datePicker");
+    }
+
+    private String twoDigits(int n) {
+        return (n <= 9) ? ("0" + n) : String.valueOf(n);
     }
 
 }
