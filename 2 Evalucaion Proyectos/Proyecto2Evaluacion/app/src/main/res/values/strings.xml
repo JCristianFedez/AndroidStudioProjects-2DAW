@@ -22,4 +22,5 @@
     <string name="btnElegirImagen">Seleccione imagen</string>
     <string name="etFiltroFecha">Fecha</string>
     <string name="btnFiltroIncidencia">Filtrar</string>
+    <string name="btnEliminarFiltro">ELiminar Filtro</string>
 </resources>

@@ -87,7 +87,7 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    public void insertarIncidencia(View v) {
+    private void insertarIncidencia(View v) {
         ProyectoSQLiteHelper prdbh = new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
         db = prdbh.getWritableDatabase();
 
@@ -184,7 +184,7 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    public void vaciarEditText() {
+    private void vaciarEditText() {
         etDniIncidencia.setText("");
         etFechaInicio.setText("");
         etFechaFin.setText("");

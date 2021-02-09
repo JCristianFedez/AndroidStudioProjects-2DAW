@@ -11,6 +11,8 @@ public class listado_usuarios extends AppCompatActivity {
 
     private SQLiteDatabase db;
     private TextView tvListadoUsuarios;
+    private ProyectoSQLiteHelper prdbh;
+    private Cursor c;
 
     private static final String USER_TABLE_NAME = "usuario";
     private static final String USER_DNI = "dni";
@@ -36,15 +38,17 @@ public class listado_usuarios extends AppCompatActivity {
         setContentView(R.layout.activity_listado_usuarios);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        muestraUsuario();
 
-        ProyectoSQLiteHelper prdbh =
-                new ProyectoSQLiteHelper(this,"DBProyecto",null,1);
+    }
 
-        db = prdbh.getWritableDatabase();
+    private void muestraUsuario(){
+        prdbh = new ProyectoSQLiteHelper(this,"DBProyecto",null,1);
+
+        db = prdbh.getReadableDatabase();
 
         tvListadoUsuarios = (TextView) findViewById(R.id.tvListadoUsuarios);
         if(db != null){
-            Cursor c;
             String[] args;
             tvListadoUsuarios.setText("");
 
@@ -60,16 +64,16 @@ public class listado_usuarios extends AppCompatActivity {
                     int perfil = c.getInt(2);
                     String admin = (perfil==1)?"Administrador":"Usuario";
                     tvListadoUsuarios.append(" " + dni + " - " + nombre + " - " + admin +"\n");
+                    tvListadoUsuarios.append("\n");
                 }while(c.moveToNext());
-                tvListadoUsuarios.append("\n\n");
             }
 
-            if(tvListadoUsuarios.getText().toString() == ""){
+            if(tvListadoUsuarios.getText().toString().equals("")){
                 tvListadoUsuarios.setText("No registros en la Base de datos");
             }
 
             db.close();
+            c.close();
         }
-
     }
 }

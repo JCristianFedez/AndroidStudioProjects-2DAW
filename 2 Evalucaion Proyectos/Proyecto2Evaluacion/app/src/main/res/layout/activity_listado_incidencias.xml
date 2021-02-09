@@ -6,17 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".listado_incidencias">
 
+
     <EditText
         android:id="@+id/etFiltroFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="date"
+        android:background="@android:drawable/editbox_background_normal"
         android:clickable="true"
+        android:ems="10"
         android:focusable="false"
-        android:text="@string/etFiltroFecha"
+        android:hint="@string/etFiltroFecha"
+        android:inputType="date"
+        android:longClickable="false"
+        android:padding="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/spFiltroEstado"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,11 +40,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="#008A53"
         android:text="@string/btnFiltroIncidencia"
+        app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnFiltroIncidenciaVaciar"
         app:layout_constraintTop_toBottomOf="@+id/etFiltroFecha" />
 
+
+    <Button
+        android:id="@+id/btnFiltroIncidenciaVaciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#008A53"
+        android:text="@string/btnEliminarFiltro"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/btnFiltroIncidencia"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnFiltroIncidencia" />
 
     <ScrollView
         android:layout_width="match_parent"

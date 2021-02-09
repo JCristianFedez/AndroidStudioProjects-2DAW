@@ -52,6 +52,7 @@
                 android:inputType="date"
                 android:focusable="false"
                 android:clickable="true"
+                android:longClickable="false"
                 android:padding="10dp" />
 
             <EditText
@@ -68,6 +69,7 @@
                 android:inputType="date"
                 android:focusable="false"
                 android:clickable="true"
+                android:longClickable="false"
                 android:padding="10dp" />
 
             <EditText
