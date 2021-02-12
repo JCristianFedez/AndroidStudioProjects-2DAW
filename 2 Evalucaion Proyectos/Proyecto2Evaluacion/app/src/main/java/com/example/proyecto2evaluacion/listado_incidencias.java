@@ -99,10 +99,24 @@ public class listado_incidencias extends AppCompatActivity implements View.OnCli
             String[] args;
             tvListadoIncidencias.setText("");
 
-            //TODO: MOSTRAR EL NOMBRE DEL RESPONSABLE NO EL DNI
+            String query = "SELECT "
+                    + INC_DNI + ", "
+                    + INC_FECHA_INICIO + ", "
+                    + INC_ESTADO + ", "
+                    + INC_RESPONSABLE
+                    + " FROM " + INC_TABLE_NAME
+                    + filtro;
 
-            c = db.rawQuery("SELECT " + INC_DNI + ", " + INC_FECHA_INICIO + ", " + INC_ESTADO + ", " + INC_RESPONSABLE +
-                    " FROM " + INC_TABLE_NAME + filtro, null);
+            String queryConNombreUsuario = "SELECT "
+                    + INC_TABLE_NAME + "." + INC_DNI + ", "
+                    + INC_TABLE_NAME + "." + INC_FECHA_INICIO + ", "
+                    + INC_TABLE_NAME + "." + INC_ESTADO + ", "
+                    + USER_TABLE_NAME + "." + USER_NOM
+                    + " FROM " + INC_TABLE_NAME
+                    + " INNER JOIN " + USER_TABLE_NAME + " ON " + USER_TABLE_NAME + "." + USER_DNI + "=" + INC_TABLE_NAME + "." +INC_RESPONSABLE
+                    + filtro;
+
+            c = db.rawQuery(queryConNombreUsuario, null);
 
             if (c.moveToFirst()) {
                 do {
@@ -119,7 +133,7 @@ public class listado_incidencias extends AppCompatActivity implements View.OnCli
             }
 
             if (tvListadoIncidencias.getText().toString().equals("")) {
-                tvListadoIncidencias.setText("No registros en la Base de datos");
+                tvListadoIncidencias.setText("No hay registros en la Base de datos");
             }
             c.close();
             db.close();

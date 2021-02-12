@@ -24,7 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#008A53"
         android:text="@string/btnListaUsuarios"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAltaUsuario"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -34,7 +36,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#008A53"
         android:text="@string/btnListaIncidencias"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnListaUsuarios"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -44,7 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#008A53"
         android:text="@string/btnAltaUsuario"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toTopOf="@+id/btnAltaIncidencia"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -54,7 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
+        android:backgroundTint="#008A53"
         android:text="@string/btnAltaIncidencia"
+        app:cornerRadius="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -63,13 +63,13 @@ public class listado_usuarios extends AppCompatActivity {
                     String dni = c.getString(1);
                     int perfil = c.getInt(2);
                     String admin = (perfil==1)?"Administrador":"Usuario";
-                    tvListadoUsuarios.append(" " + dni + " - " + nombre + " - " + admin +"\n");
+                    tvListadoUsuarios.append(" DNI: " + dni + " | Nombre: " + nombre + " | Tipo:  " + admin +"\n");
                     tvListadoUsuarios.append("\n");
                 }while(c.moveToNext());
             }
 
             if(tvListadoUsuarios.getText().toString().equals("")){
-                tvListadoUsuarios.setText("No registros en la Base de datos");
+                tvListadoUsuarios.setText("No hay registros en la Base de datos");
             }
 
             db.close();
