@@ -5,14 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-public class listado_usuarios extends AppCompatActivity {
+public class listado_usuarios extends AppCompatActivity implements View.OnClickListener {
 
     private SQLiteDatabase db;
     private TextView tvListadoUsuarios;
     private ProyectoSQLiteHelper prdbh;
     private Cursor c;
+
+    private EditText etNombreFiltrar;
+    private EditText etDniFiltrar;
+    private Button btnEliminarUsuario;
+    private Button btnModificarUsuario;
+    private Button btnFiltrarUsuario;
+    private Button btnEliminarFiltro;
 
     private static final String USER_TABLE_NAME = "usuario";
     private static final String USER_DNI = "dni";
@@ -38,8 +48,41 @@ public class listado_usuarios extends AppCompatActivity {
         setContentView(R.layout.activity_listado_usuarios);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        etDniFiltrar = (EditText) findViewById(R.id.etDniFiltrar);
+        etNombreFiltrar = (EditText) findViewById(R.id.etNombreFiltrar);
+
+        btnFiltrarUsuario = (Button) findViewById(R.id.btnFiltrarUsuario);
+        btnEliminarFiltro = (Button) findViewById(R.id.btnEliminarFiltroUsuario);
+        btnModificarUsuario = (Button) findViewById(R.id.btnModificarUsuario);
+        btnEliminarUsuario = (Button) findViewById(R.id.btnEliminarUsuario);
+
+        btnFiltrarUsuario.setOnClickListener(this);
+        btnEliminarFiltro.setOnClickListener(this);
+        btnModificarUsuario.setOnClickListener(this);
+        btnEliminarUsuario.setOnClickListener(this);
+
         muestraUsuario();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnFiltrarUsuario:
+                muestraUsuario();
+                break;
+
+            case R.id.btnEliminarFiltroUsuario:
+                eliminarFiltro();
+                muestraUsuario();
+                break;
+
+            case R.id.btnModificarUsuario:
+                break;
+
+            case R.id.btnEliminarUsuario:
+                break;
+        }
     }
 
     private void muestraUsuario(){
@@ -51,19 +94,25 @@ public class listado_usuarios extends AppCompatActivity {
         if(db != null){
             String[] args;
             tvListadoUsuarios.setText("");
+            String queryConCantIncidencias = "SELECT "
+                    + USER_TABLE_NAME + "." + USER_NOM + ", "
+                    + USER_TABLE_NAME + "." + USER_DNI + ", "
+                    + USER_TABLE_NAME + "." + USER_PERFIL + ", "
+                    + " Count(DISTINCT " + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias"
+                    + " FROM " + USER_TABLE_NAME
+                    + " INNER JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_RESPONSABLE + "=" + USER_TABLE_NAME + "." +USER_DNI
+                    + " GROUP BY " + USER_TABLE_NAME + "." + USER_NOM + ", " + USER_TABLE_NAME + "." + USER_DNI;
 
-            //TODO: MOSTRAR BIEN LOS DATOS
-            c = db.rawQuery(
-                    "SELECT "+USER_NOM+", "+USER_DNI+", "+USER_PERFIL+" FROM "+USER_TABLE_NAME, null
-            );
+            c = db.rawQuery(queryConCantIncidencias, null);
 
             if(c.moveToFirst()){
                 do{
                     String nombre = c.getString(0);
                     String dni = c.getString(1);
                     int perfil = c.getInt(2);
+                    int cant = c.getInt(3);
                     String admin = (perfil==1)?"Administrador":"Usuario";
-                    tvListadoUsuarios.append(" DNI: " + dni + " | Nombre: " + nombre + " | Tipo:  " + admin +"\n");
+                    tvListadoUsuarios.append(" DNI: " + dni + " | Nombre: " + nombre + " | Tipo:  " + admin +" | Cant Incidencias: " + cant +"\n");
                     tvListadoUsuarios.append("\n");
                 }while(c.moveToNext());
             }
@@ -75,5 +124,60 @@ public class listado_usuarios extends AppCompatActivity {
             db.close();
             c.close();
         }
+    }
+
+    /**
+     * Devuevlve el filtro
+     *
+     * @return
+     */
+    //TODO: Terminar filtro por dni y nombre + modificar + eliminar
+    private String filtro() {
+        String nombreFiltrar = etNombreFiltrar.getText().toString();
+        String dniFiltrar = etDniFiltrar.getText().toString();
+
+        String filtro = "";
+
+        if(nombreFiltrar.equals("")){
+            if(dniFiltrar.equals("")){
+
+            }else{
+
+            }
+        }else{
+            if(dniFiltrar.equals("")){
+
+            }
+        }
+//        switch (estado) {
+//            case "Resuelta":
+//                if (nombreFiltrar.equals("")) {
+//                    filtro = " WHERE " + INC_ESTADO + "=1";
+//                } else {
+//                    filtro = " WHERE " + INC_ESTADO + "=1 AND " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
+//                }
+//                break;
+//            case "No Resuelta":
+//                if (nombreFiltrar.equals("")) {
+//                    filtro = " WHERE " + INC_ESTADO + "=0";
+//                } else {
+//                    filtro = " WHERE " + INC_ESTADO + "=0 AND " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
+//                }
+//                break;
+//            default:
+//                if (!nombreFiltrar.equals("")) {
+//                    filtro = " WHERE " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
+//                }
+//        }
+
+        return filtro;
+    }
+
+    /**
+     * Elimino el filtro
+     */
+    private void eliminarFiltro(){
+        etDniFiltrar.setText("");
+        etNombreFiltrar.setText("");
     }
 }

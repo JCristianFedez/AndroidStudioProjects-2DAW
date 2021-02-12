@@ -21,6 +21,10 @@
     <string name="tvResuelta">Marque si la incidencia esta resuelta</string>
     <string name="btnElegirImagen">Seleccione imagen</string>
     <string name="etFiltroFecha">Fecha</string>
-    <string name="btnFiltroIncidencia">Filtrar</string>
+    <string name="btnFiltro">Filtrar</string>
     <string name="btnEliminarFiltro">ELiminar Filtro</string>
+    <string name="btnEliminar">ELiminar</string>
+    <string name="btnModificar">Modificar</string>
+    <string name="Nombre">Nombre</string>
+    <string name="dni">DNI</string>
 </resources>
