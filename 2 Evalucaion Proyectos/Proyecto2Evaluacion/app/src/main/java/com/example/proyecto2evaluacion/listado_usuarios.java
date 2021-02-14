@@ -2,6 +2,7 @@ package com.example.proyecto2evaluacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class listado_usuarios extends AppCompatActivity implements View.OnClickListener {
 
@@ -78,14 +80,25 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.btnModificarUsuario:
+                actualizarUsuario(etDniFiltrar.getText().toString(),etNombreFiltrar.getText().toString());
+                eliminarFiltro();
+                muestraUsuario();
+
                 break;
 
             case R.id.btnEliminarUsuario:
+                eliminaUsuario(etDniFiltrar.getText().toString());
+                eliminarFiltro();
+                muestraUsuario();
                 break;
         }
     }
 
+    /**
+     * Muestra un listado con todos los usuarios
+     */
     private void muestraUsuario(){
+        String filtro = filtro();
         prdbh = new ProyectoSQLiteHelper(this,"DBProyecto",null,1);
 
         db = prdbh.getReadableDatabase();
@@ -94,13 +107,15 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
         if(db != null){
             String[] args;
             tvListadoUsuarios.setText("");
+
             String queryConCantIncidencias = "SELECT "
                     + USER_TABLE_NAME + "." + USER_NOM + ", "
                     + USER_TABLE_NAME + "." + USER_DNI + ", "
                     + USER_TABLE_NAME + "." + USER_PERFIL + ", "
                     + " Count(DISTINCT " + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias"
                     + " FROM " + USER_TABLE_NAME
-                    + " INNER JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_RESPONSABLE + "=" + USER_TABLE_NAME + "." +USER_DNI
+                    + " LEFT JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_RESPONSABLE + "=" + USER_TABLE_NAME + "." +USER_DNI
+                    + filtro
                     + " GROUP BY " + USER_TABLE_NAME + "." + USER_NOM + ", " + USER_TABLE_NAME + "." + USER_DNI;
 
             c = db.rawQuery(queryConCantIncidencias, null);
@@ -127,48 +142,74 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
     }
 
     /**
+     * Elimina al usuario con dni <code>dni</code>
+     * @param dni
+     */
+    private void eliminaUsuario(String dni){
+        if(dni.equals("")){
+            Toast.makeText(this, "Debe introducir DNI del usuario a eliminar", Toast.LENGTH_SHORT).show();
+        }else{
+            db = prdbh.getReadableDatabase();
+            String[] args = new String[]{dni};
+            c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
+            if (c.getCount() != 0) {
+                db.delete(USER_TABLE_NAME, USER_DNI + "=?", args);
+                Toast.makeText(this, "Usuario con dni " + dni + " eliminado", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "N existe ningun usuario con dicho DNI", Toast.LENGTH_SHORT).show();
+            }
+            c.close();
+            db.close();
+        }
+    }
+
+    /**
+     * Cambia el nombre del usuario con <code>dni</code> a <code>nuevoNombre</code>
+     * @param dni
+     * @param nuevoNombre
+     */
+    private void actualizarUsuario(String dni, String nuevoNombre){
+        if(dni.equals("") || nuevoNombre.equals("")){
+            Toast.makeText(this, "Debe introducir DNI y nombre", Toast.LENGTH_SHORT).show();
+        }else{
+            db = prdbh.getReadableDatabase();
+            String[] args = new String[]{dni};
+            c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
+            if (c.getCount() != 0) {
+                ContentValues cv = new ContentValues();
+                cv.put(USER_NOM,nuevoNombre);
+                db.update(USER_TABLE_NAME,cv,USER_DNI + "=?",args);
+                Toast.makeText(this, "Usuario con dni " + dni + " ahora se llama " + nuevoNombre, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "N existe ningun usuario con dicho DNI", Toast.LENGTH_SHORT).show();
+            }
+            c.close();
+            db.close();
+        }
+    }
+    /**
      * Devuevlve el filtro
      *
      * @return
      */
-    //TODO: Terminar filtro por dni y nombre + modificar + eliminar
     private String filtro() {
         String nombreFiltrar = etNombreFiltrar.getText().toString();
         String dniFiltrar = etDniFiltrar.getText().toString();
 
         String filtro = "";
 
-        if(nombreFiltrar.equals("")){
-            if(dniFiltrar.equals("")){
-
+        if(!nombreFiltrar.equals("")){
+            if(!dniFiltrar.equals("")){
+                filtro = " WHERE " + USER_TABLE_NAME + "." + USER_DNI + "='" + dniFiltrar +"'"
+                        + " AND " +  USER_TABLE_NAME + "." +USER_NOM + "='" + nombreFiltrar +"'";
             }else{
-
+                filtro = " WHERE " + USER_TABLE_NAME + "." + USER_NOM + "='" + nombreFiltrar +"'";
             }
         }else{
-            if(dniFiltrar.equals("")){
-
+            if(!dniFiltrar.equals("")){
+                filtro = " WHERE " +  USER_TABLE_NAME + "." + USER_DNI + "='" + dniFiltrar +"'";
             }
         }
-//        switch (estado) {
-//            case "Resuelta":
-//                if (nombreFiltrar.equals("")) {
-//                    filtro = " WHERE " + INC_ESTADO + "=1";
-//                } else {
-//                    filtro = " WHERE " + INC_ESTADO + "=1 AND " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
-//                }
-//                break;
-//            case "No Resuelta":
-//                if (nombreFiltrar.equals("")) {
-//                    filtro = " WHERE " + INC_ESTADO + "=0";
-//                } else {
-//                    filtro = " WHERE " + INC_ESTADO + "=0 AND " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
-//                }
-//                break;
-//            default:
-//                if (!nombreFiltrar.equals("")) {
-//                    filtro = " WHERE " + INC_FECHA_INICIO + "='" + nombreFiltrar + "'";
-//                }
-//        }
 
         return filtro;
     }

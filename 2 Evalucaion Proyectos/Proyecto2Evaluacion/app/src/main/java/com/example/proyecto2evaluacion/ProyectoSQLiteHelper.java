@@ -49,7 +49,9 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
             + INC_RESPONSABLE + " TEXT,"
             + INC_ESTADO + " INTEGER,"
             + INC_FECHA_FIN + " TEXT,"
-            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
+            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +") "
+            + "ON DELETE CASCADE "
+            + "ON UPDATE CASCADE"
             + ");";
 
     public ProyectoSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
@@ -62,6 +64,14 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_INC_TABLE);
     }
+
+    // Sirve para poder usar las claves foraneas y las eliminaciones y actualizaciones en cascada
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        db.execSQL("PRAGMA foreign_keys = ON;");
+    }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
