@@ -151,6 +151,13 @@
                 android:text="@string/btnElegirImagen"
                 app:cornerRadius="15dp" />
 
+            <ImageView
+                android:id="@+id/ivPerfilUsuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/ivPerfilDescription"
+                tools:srcCompat="@tools:sample/avatars" />
+
             <Button
                 android:id="@+id/btnInsertarIncidencia"
                 android:layout_width="wrap_content"

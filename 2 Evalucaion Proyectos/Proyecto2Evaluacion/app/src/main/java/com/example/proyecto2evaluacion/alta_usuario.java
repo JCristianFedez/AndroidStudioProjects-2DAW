@@ -1,17 +1,31 @@
 package com.example.proyecto2evaluacion;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class alta_usuario extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,11 +38,22 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
     private static final String USER_PERFIL = "perfil";
     private static final String USER_FOTO = "foto";
 
+    private static final int COD_SELECCIONA = 10;
+    private static final int COD_FOTO = 20;
+
+    private static final String CARPETA_PRINCIPAL = "misImagenesApp/"; // Directorio principal
+    private static final String CARPETA_IMAGEN = "imagenes"; // Carpeta donde se guardaran als imagenes
+    private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;
+    private String path; // Almacena la ruta de la imagen
+    File fileImagen;
+    Bitmap bitmap;
+
     private EditText etNombre;
     private EditText etApellidos;
     private EditText etDni;
     private EditText etUsuari;
     private EditText etPassword;
+    private ImageView ivPerfilUsuario;
     private Button btnInsertarUsuario;
     private Button btnElegirImagen;
     private RadioGroup rgPerfil;
@@ -49,6 +74,7 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
         etDni = (EditText) findViewById(R.id.etDni);
         etUsuari = (EditText) findViewById(R.id.etUsuari);
         etPassword = (EditText) findViewById(R.id.etPassword);
+        ivPerfilUsuario = (ImageView) findViewById(R.id.ivPerfilUsuario);
         btnInsertarUsuario = (Button) findViewById(R.id.btnInsertarIncidencia);
         btnElegirImagen = (Button) findViewById(R.id.btnElegirImagen);
         rgPerfil = (RadioGroup) findViewById(R.id.rgPerfil);
@@ -60,6 +86,7 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnElegirImagen:
+                mostrarDialogoOpciones();
                 break;
             case R.id.btnInsertarIncidencia:
                 insertarUsuario();
@@ -67,7 +94,7 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void insertarUsuario() {
+    private void insertarUsuario() {
         ProyectoSQLiteHelper prdbh =
                 new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
 
@@ -118,7 +145,7 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public void vaciarEditText() {
+    private void vaciarEditText() {
         etNombre.setText("");
         etApellidos.setText("");
         etDni.setText("");
@@ -127,4 +154,76 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
         rgPerfil.clearCheck();
     }
 
+    private void mostrarDialogoOpciones(){
+        final CharSequence[] opciones = {"Tomar Foto", "Elegir de Galeria","Cancelar"};
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Elige una opcion");
+        builder.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if(opciones[i].equals("Tomar Foto")){
+                    abrirCamara();
+                }else{
+                    if(opciones[i].equals("Elegir de Galeria")){
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT,
+                                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(Intent.createChooser(intent,"Seleccione"),COD_SELECCIONA);
+                    }else{
+                        dialog.dismiss();
+                    }
+                }
+            }
+        });
+        builder.create().show();
+    }
+
+    private void abrirCamara() {
+        File miFile = new File(Environment.getExternalStorageDirectory(),DIRECTORIO_IMAGEN);
+        boolean isCreada = miFile.exists();
+        if(!isCreada){
+            isCreada = miFile.mkdirs();
+        }else{
+            Long consecutivo = System.currentTimeMillis()/1000;
+            String nombre = consecutivo.toString() + ".jpg";
+
+            // Indicamos la ruta de almacenamiento
+            path = Environment.getExternalStorageDirectory()
+                    + File.separator
+                    + DIRECTORIO_IMAGEN
+                    + File.separator
+                    + nombre;
+
+            fileImagen = new File(path);
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(fileImagen));
+
+            startActivityForResult(intent,COD_FOTO);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case COD_SELECCIONA:
+                Uri miPath = data.getData();
+                ivPerfilUsuario.setImageURI(miPath);
+                break;
+
+            case COD_FOTO:
+                MediaScannerConnection.scanFile(this, new String[]{path}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+                            @Override
+                            public void onScanCompleted(String path, Uri uri) {
+                                Log.i("Path","" + path);
+                            }
+                        });
+
+                bitmap = BitmapFactory.decodeFile(path);
+                ivPerfilUsuario.setImageBitmap(bitmap);
+                break;
+        }
+    }
 }

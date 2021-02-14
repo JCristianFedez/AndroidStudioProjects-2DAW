@@ -27,4 +27,5 @@
     <string name="btnModificar">Modificar</string>
     <string name="Nombre">Nombre</string>
     <string name="dni">DNI</string>
+    <string name="ivPerfilDescription">Imagen de perfil</string>
 </resources>
