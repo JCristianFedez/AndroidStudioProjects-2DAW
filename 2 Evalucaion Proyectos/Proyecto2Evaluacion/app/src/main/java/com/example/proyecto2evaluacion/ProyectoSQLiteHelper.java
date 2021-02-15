@@ -43,15 +43,16 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
     //SENTENTCIA SQL CREAR TABLA Incidencia
     private static final String CREATE_INC_TABLE = "create table "
             + INC_TABLE_NAME + " ("
-            + INC_DNI + " TEXT PRIMARY KEY,"
+            + INC_DNI + " TEXT,"
             + INC_FECHA_INICIO + " TEXT,"
             + INC_OBSER + " TEXT,"
             + INC_RESPONSABLE + " TEXT,"
             + INC_ESTADO + " INTEGER,"
             + INC_FECHA_FIN + " TEXT,"
-            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +") "
+            + "foreign key("+ INC_DNI +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
             + "ON DELETE CASCADE "
-            + "ON UPDATE CASCADE"
+            + "ON UPDATE CASCADE, "
+            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
             + ");";
 
     public ProyectoSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {

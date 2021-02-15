@@ -112,9 +112,9 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
                     + USER_TABLE_NAME + "." + USER_NOM + ", "
                     + USER_TABLE_NAME + "." + USER_DNI + ", "
                     + USER_TABLE_NAME + "." + USER_PERFIL + ", "
-                    + " Count(DISTINCT " + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias"
+                    + " Count(" + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias"
                     + " FROM " + USER_TABLE_NAME
-                    + " LEFT JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_RESPONSABLE + "=" + USER_TABLE_NAME + "." +USER_DNI
+                    + " LEFT JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_DNI + "=" + USER_TABLE_NAME + "." +USER_DNI
                     + filtro
                     + " GROUP BY " + USER_TABLE_NAME + "." + USER_NOM + ", " + USER_TABLE_NAME + "." + USER_DNI;
 

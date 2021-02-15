@@ -74,10 +74,12 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etFechaInicio:
+                etFechaInicio.setText("");
                 showDatePickerDialog(etFechaInicio);
                 break;
 
             case R.id.etFechaFin:
+                etFechaFin.setText("");
                 showDatePickerDialog(etFechaFin);
                 break;
 
@@ -109,7 +111,7 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
 
             // Si esta resuelta pero no tiene fecha de fin
             if (cbResuelta.isChecked() && etFechaFin.getText().toString().equals("")) {
-                snackbar = Snackbar.make(v, "Completa los datos", Snackbar.LENGTH_LONG);
+                snackbar = Snackbar.make(v, "Si la incidencia esta resuelta tiene que tener fecha de fin", Snackbar.LENGTH_LONG);
                 snackbar.show();
                 db.close();
                 return;
@@ -145,27 +147,39 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
                 return;
             }
 
-            //Compruebo que el responsable existe
-            args = new String[]{etDniResponsable.getText().toString()};
+            //Compruebo que el existe un usuario con dicho DNI
+            args = new String[]{etDniIncidencia.getText().toString()};
             c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
             if (c.getCount() == 0) {
-                snackbar = Snackbar.make(v, "Rsponsable con DNI   " + etDniResponsable.getText().toString() + " no existente", Snackbar.LENGTH_LONG);
+                snackbar = Snackbar.make(v, "No existe usuario con DNI  " + etDniIncidencia.getText().toString(), Snackbar.LENGTH_LONG);
                 snackbar.show();
                 db.close();
                 c.close();
                 return;
             }
 
-            //Compruebo que el DNI de la incidencia no existe
-            args = new String[]{etDniIncidencia.getText().toString()};
-            c = db.rawQuery("SELECT * FROM " + INC_TABLE_NAME + " WHERE " + INC_DNI + "=? ", args);
-            if (c.getCount() != 0) {
-                snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " ya existente", Snackbar.LENGTH_LONG);
+            //Compruebo que el responsable existe
+            args = new String[]{etDniResponsable.getText().toString()};
+            c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
+            if (c.getCount() == 0) {
+                snackbar = Snackbar.make(v, "Rsponsable con DNI " + etDniResponsable.getText().toString() + " no existente", Snackbar.LENGTH_LONG);
                 snackbar.show();
                 db.close();
                 c.close();
                 return;
             }
+
+            // Compruebo que el usuario responsable sea de tipo administrador
+            args = new String[]{etDniResponsable.getText().toString(),"1"};
+            c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? AND " + USER_PERFIL + "=?", args);
+            if (c.getCount() == 0) {
+                snackbar = Snackbar.make(v, "El usuario con " + etDniResponsable.getText().toString() + " no es administrador, por lo que no puede ser responsable", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                db.close();
+                c.close();
+                return;
+            }
+
 
             int resuelta = (cbResuelta.isChecked()) ? 1 : 0;
             querry.put(INC_DNI, etDniIncidencia.getText().toString());
@@ -175,7 +189,7 @@ public class alta_incidencia extends AppCompatActivity implements View.OnClickLi
             querry.put(INC_RESPONSABLE, etDniResponsable.getText().toString());
             querry.put(INC_ESTADO, resuelta);
             db.insert(INC_TABLE_NAME, null, querry);
-            snackbar = Snackbar.make(v, "Incidencia con DNI  " + etDniIncidencia.getText().toString() + " añadido", Snackbar.LENGTH_LONG);
+            snackbar = Snackbar.make(v, "Incidencia añadida", Snackbar.LENGTH_LONG);
             snackbar.show();
             vaciarEditText();
             c.close();

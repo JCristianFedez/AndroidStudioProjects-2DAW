@@ -20,8 +20,6 @@ import java.util.ArrayList;
 
 public class listado_incidencias extends AppCompatActivity implements View.OnClickListener {
 
-    //TODO: APLICAR FILTROS
-
     private SQLiteDatabase db;
     private Cursor c;
     private ProyectoSQLiteHelper prdbh;
