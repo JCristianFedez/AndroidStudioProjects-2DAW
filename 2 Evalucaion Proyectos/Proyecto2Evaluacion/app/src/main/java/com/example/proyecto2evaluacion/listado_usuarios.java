@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class listado_usuarios extends AppCompatActivity implements View.OnClickListener {
 
     private SQLiteDatabase db;
-    private TextView tvListadoUsuarios;
+    private ListView lvListaUsuarios;
     private ProyectoSQLiteHelper prdbh;
     private Cursor c;
 
@@ -43,12 +46,14 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
     private static final String INC_ESTADO = "estado";
     private static final String INC_FECHA_FIN = "fecha_resolucion";
 
+    private Adaptador adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_usuarios);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        lvListaUsuarios = (ListView) findViewById(R.id.lvListaUsuarios);
 
         etDniFiltrar = (EditText) findViewById(R.id.etDniFiltrar);
         etNombreFiltrar = (EditText) findViewById(R.id.etNombreFiltrar);
@@ -103,11 +108,11 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
 
         db = prdbh.getReadableDatabase();
 
-        tvListadoUsuarios = (TextView) findViewById(R.id.tvListadoUsuarios);
+//        tvListadoUsuarios = (TextView) findViewById(R.id.tvListadoUsuarios);
         if(db != null){
             String[] args;
-            tvListadoUsuarios.setText("");
-
+            Boolean vacia = true;
+            lvListaUsuarios.setAdapter(null);
             String queryConCantIncidencias = "SELECT "
                     + USER_TABLE_NAME + "." + USER_NOM + ", "
                     + USER_TABLE_NAME + "." + USER_DNI + ", "
@@ -121,20 +126,25 @@ public class listado_usuarios extends AppCompatActivity implements View.OnClickL
             c = db.rawQuery(queryConCantIncidencias, null);
 
             if(c.moveToFirst()){
+                ArrayList<ItemListview> listUsuarios = new ArrayList<>();
+                vacia=false;
                 do{
                     String nombre = c.getString(0);
                     String dni = c.getString(1);
                     int perfil = c.getInt(2);
                     int cant = c.getInt(3);
                     String admin = (perfil==1)?"Administrador":"Usuario";
-                    tvListadoUsuarios.append(" DNI: " + dni + " | Nombre: " + nombre + " | Tipo:  " + admin +" | Cant Incidencias: " + cant +"\n");
-                    tvListadoUsuarios.append("\n");
+                    listUsuarios.add(new ItemListview(R.drawable.ic_launcher_background,dni,nombre,admin,String.valueOf(cant)));
                 }while(c.moveToNext());
+                adaptador = new Adaptador(this, listUsuarios);
+                lvListaUsuarios.setAdapter(adaptador);
+
             }
 
-            if(tvListadoUsuarios.getText().toString().equals("")){
-                tvListadoUsuarios.setText("No hay registros en la Base de datos");
+            if(vacia){
+                Toast.makeText(this, "No hay registros en la base de datos", Toast.LENGTH_SHORT).show();
             }
+
 
             db.close();
             c.close();
