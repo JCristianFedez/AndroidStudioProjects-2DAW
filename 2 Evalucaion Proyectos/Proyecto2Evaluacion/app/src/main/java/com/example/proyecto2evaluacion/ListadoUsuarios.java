@@ -15,7 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class listado_usuarios extends AppCompatActivity implements View.OnClickListener {
+public class ListadoUsuarios extends AppCompatActivity implements View.OnClickListener {
 
     private SQLiteDatabase db;
     private ListView lvListaUsuarios;

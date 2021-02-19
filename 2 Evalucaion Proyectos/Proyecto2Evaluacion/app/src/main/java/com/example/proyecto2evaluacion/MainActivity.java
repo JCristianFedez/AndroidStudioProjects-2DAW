@@ -35,19 +35,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnListaUsuarios:
-                intent = new Intent(this, listado_usuarios.class);
+                intent = new Intent(this, ListadoUsuarios.class);
                 startActivity(intent);
                 break;
             case R.id.btnListaIncidencias:
-                intent = new Intent(this, listado_incidencias.class);
+                intent = new Intent(this, ListadoIncidencia.class);
                 startActivity(intent);
                 break;
             case R.id.btnAltaUsuario:
-                intent = new Intent(this, alta_usuario.class);
+                intent = new Intent(this, AltaUsuario.class);
                 startActivity(intent);
                 break;
             case R.id.btnAltaIncidencia:
-                intent = new Intent(this, alta_incidencia.class);
+                intent = new Intent(this, AltaIncidencia.class);
                 startActivity(intent);
                 break;
         }

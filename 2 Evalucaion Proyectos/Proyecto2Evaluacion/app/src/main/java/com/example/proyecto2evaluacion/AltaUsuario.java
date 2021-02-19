@@ -27,7 +27,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class alta_usuario extends AppCompatActivity implements View.OnClickListener {
+public class AltaUsuario extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TABLE_NAME = "usuario";
     private static final String USER_DNI = "dni";
@@ -117,7 +117,8 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
                         etDni.getText().toString().trim().equals("") ||
                         etUsuari.getText().toString().trim().equals("") ||
                         etPassword.getText().toString().trim().equals("") ||
-                        rbPerfilSeleccionado.getText().toString().trim().equals("")) {
+                        rbPerfilSeleccionado.getText().toString().trim().equals("") ||
+                        ivPerfilUsuario.getDrawable() == null) {
                     Toast.makeText(this, "Completa los datos", Toast.LENGTH_SHORT).show();
 
                 } else {
@@ -152,6 +153,9 @@ public class alta_usuario extends AppCompatActivity implements View.OnClickListe
         etUsuari.setText("");
         etPassword.setText("");
         rgPerfil.clearCheck();
+
+        //Vaciar imagen
+        ivPerfilUsuario.setImageResource(0);
     }
 
     private void mostrarDialogoOpciones(){

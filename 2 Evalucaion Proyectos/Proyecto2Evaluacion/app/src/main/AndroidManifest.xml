@@ -16,16 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Proyecto2Evaluacion">
         <activity
-            android:name=".alta_incidencia"
+            android:name=".AltaIncidencia"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".alta_usuario"
+            android:name=".AltaUsuario"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".listado_usuarios"
+            android:name=".ListadoUsuarios"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".listado_incidencias"
+            android:name=".ListadoIncidencia"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

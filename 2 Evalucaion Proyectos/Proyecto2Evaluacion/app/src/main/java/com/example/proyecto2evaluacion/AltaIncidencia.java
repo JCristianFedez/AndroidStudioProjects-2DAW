@@ -19,7 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class alta_incidencia extends AppCompatActivity implements View.OnClickListener {
+public class AltaIncidencia extends AppCompatActivity implements View.OnClickListener {
 
     private static final String USER_TABLE_NAME = "usuario";
     private static final String USER_DNI = "dni";

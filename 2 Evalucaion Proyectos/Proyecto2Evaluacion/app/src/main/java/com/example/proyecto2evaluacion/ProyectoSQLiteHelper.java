@@ -37,7 +37,7 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
             + USER_US + " TEXT,"
             + USER_PASS + " TEXT,"
             + USER_PERFIL + " INTEGER,"
-            + USER_FOTO + " BLOB"
+            + USER_FOTO + " TEXT"
             + ");";
 
     //SENTENTCIA SQL CREAR TABLA Incidencia

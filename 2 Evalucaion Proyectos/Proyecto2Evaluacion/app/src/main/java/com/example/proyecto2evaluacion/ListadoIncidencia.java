@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class listado_incidencias extends AppCompatActivity implements View.OnClickListener {
+public class ListadoIncidencia extends AppCompatActivity implements View.OnClickListener {
 
     private SQLiteDatabase db;
     private Cursor c;
