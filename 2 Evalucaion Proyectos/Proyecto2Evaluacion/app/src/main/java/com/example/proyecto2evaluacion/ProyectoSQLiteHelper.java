@@ -26,7 +26,7 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase mDb;
 
-    //TODO: Guardar imagen
+    //TODO: Guardar imagen y agregar id
 
     //SENTENTCIA SQL CREAR TABLA Usuario
     private static final String CREATE_USER_TABLE = "create table "

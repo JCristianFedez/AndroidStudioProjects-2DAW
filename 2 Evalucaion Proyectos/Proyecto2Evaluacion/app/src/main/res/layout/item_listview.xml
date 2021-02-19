@@ -12,7 +12,8 @@
             android:id="@+id/imgFoto"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:contentDescription="" />
+            android:contentDescription=""
+            android:scaleType="center" />
 
         <LinearLayout
             android:layout_width="match_parent"

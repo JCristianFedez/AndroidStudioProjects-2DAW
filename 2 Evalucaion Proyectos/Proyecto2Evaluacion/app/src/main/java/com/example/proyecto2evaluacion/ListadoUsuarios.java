@@ -117,7 +117,8 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
                     + USER_TABLE_NAME + "." + USER_NOM + ", "
                     + USER_TABLE_NAME + "." + USER_DNI + ", "
                     + USER_TABLE_NAME + "." + USER_PERFIL + ", "
-                    + " Count(" + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias"
+                    + " Count(" + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias,"
+                    + USER_TABLE_NAME + "." + USER_FOTO + ""
                     + " FROM " + USER_TABLE_NAME
                     + " LEFT JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_DNI + "=" + USER_TABLE_NAME + "." +USER_DNI
                     + filtro
@@ -133,6 +134,7 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
                     String dni = c.getString(1);
                     int perfil = c.getInt(2);
                     int cant = c.getInt(3);
+                    String uriFoto = c.getString(4);
                     String admin = (perfil==1)?"Administrador":"Usuario";
                     listUsuarios.add(new ItemListview(R.drawable.ic_launcher_background,dni,nombre,admin,String.valueOf(cant)));
                 }while(c.moveToNext());

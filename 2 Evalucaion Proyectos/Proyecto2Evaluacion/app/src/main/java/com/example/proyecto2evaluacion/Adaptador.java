@@ -48,10 +48,10 @@ public class Adaptador extends BaseAdapter {
         TextView tvcantIncidencia = convertView.findViewById(R.id.tvcantIncidencia);
 
         imgFoto.setImageResource(item.getImgFoto());
-        tvDni.setText(item.getDni());
-        tvNombre.setText(item.getNombre());
-        tvTipo.setText(item.getTipo());
-        tvcantIncidencia.setText(item.getCantIncidencia());
+        tvDni.setText("DNI: "+item.getDni());
+        tvNombre.setText("Nombre: "+item.getNombre());
+        tvTipo.setText("Tipo: "+item.getTipo());
+        tvcantIncidencia.setText("Cant Incidencia: "+item.getCantIncidencia());
         return convertView;
     }
 }

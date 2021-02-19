@@ -28,7 +28,6 @@ import android.widget.Toast;
 import java.io.File;
 
 public class AltaUsuario extends AppCompatActivity implements View.OnClickListener {
-
     private static final String TABLE_NAME = "usuario";
     private static final String USER_DNI = "dni";
     private static final String USER_NOM = "nombre";
@@ -47,6 +46,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
     private String path; // Almacena la ruta de la imagen
     File fileImagen;
     Bitmap bitmap;
+    private Uri miPath;
 
     private EditText etNombre;
     private EditText etApellidos;
@@ -125,7 +125,6 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
                     int perfil = (rbPerfilSeleccionado.getText().toString().equals("Admin")) ? 1 : 0;
                     args = new String[]{etDni.getText().toString()};
                     c = db.rawQuery(" SELECT * FROM " + TABLE_NAME + " WHERE "+USER_DNI+"=? ", args);
-                    int a = c.getCount();
                     if (c.getCount() == 0) {
                         querry.put(USER_DNI, etDni.getText().toString());
                         querry.put(USER_NOM, etNombre.getText().toString());
@@ -212,7 +211,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
 
         switch (requestCode){
             case COD_SELECCIONA:
-                Uri miPath = data.getData();
+                miPath = data.getData();
                 ivPerfilUsuario.setImageURI(miPath);
                 break;
 
@@ -227,7 +226,9 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
 
                 bitmap = BitmapFactory.decodeFile(path);
                 ivPerfilUsuario.setImageBitmap(bitmap);
+
                 break;
         }
+
     }
 }
