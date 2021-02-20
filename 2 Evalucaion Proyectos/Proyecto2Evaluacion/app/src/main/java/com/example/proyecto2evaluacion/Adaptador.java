@@ -1,14 +1,13 @@
 package com.example.proyecto2evaluacion;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -47,7 +46,9 @@ public class Adaptador extends BaseAdapter {
         TextView tvTipo = convertView.findViewById(R.id.tvTipo);
         TextView tvcantIncidencia = convertView.findViewById(R.id.tvcantIncidencia);
 
-        imgFoto.setImageResource(item.getImgFoto());
+
+
+        imgFoto.setImageURI(Uri.parse(item.getUriFoto()));
         tvDni.setText("DNI: "+item.getDni());
         tvNombre.setText("Nombre: "+item.getNombre());
         tvTipo.setText("Tipo: "+item.getTipo());

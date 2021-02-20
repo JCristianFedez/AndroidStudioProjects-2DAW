@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 
 public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
     private static final String USER_TABLE_NAME = "usuario";
+    private static final String USER_ID = "id";
     private static final String USER_DNI = "dni";
     private static final String USER_NOM = "nombre";
     private static final String USER_AP = "apellidos";
@@ -17,6 +18,7 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
     private static final String USER_FOTO = "foto";
 
     private static final String INC_TABLE_NAME = "incidencia";
+    private static final String INC_ID = "id";
     private static final String INC_DNI = "dni";
     private static final String INC_FECHA_INICIO = "fecha_inicio";
     private static final String INC_OBSER = "observacion";
@@ -26,33 +28,36 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase mDb;
 
-    //TODO: Guardar imagen y agregar id
+    //NOTA: Al añadir la ID se me ha roto las forgein key
 
     //SENTENTCIA SQL CREAR TABLA Usuario
     private static final String CREATE_USER_TABLE = "create table "
             + USER_TABLE_NAME + " ("
-            + USER_DNI + " TEXT PRIMARY KEY,"
+            + USER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + USER_DNI + " TEXT,"
             + USER_NOM + " TEXT,"
             + USER_AP + " TEXT,"
             + USER_US + " TEXT,"
             + USER_PASS + " TEXT,"
             + USER_PERFIL + " INTEGER,"
             + USER_FOTO + " TEXT"
+//            + ", PRIMARY KEY ("+USER_DNI+","+USER_ID+")"
             + ");";
 
     //SENTENTCIA SQL CREAR TABLA Incidencia
     private static final String CREATE_INC_TABLE = "create table "
             + INC_TABLE_NAME + " ("
+            + INC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + INC_DNI + " TEXT,"
             + INC_FECHA_INICIO + " TEXT,"
             + INC_OBSER + " TEXT,"
             + INC_RESPONSABLE + " TEXT,"
             + INC_ESTADO + " INTEGER,"
-            + INC_FECHA_FIN + " TEXT,"
-            + "foreign key("+ INC_DNI +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
-            + "ON DELETE CASCADE "
-            + "ON UPDATE CASCADE, "
-            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
+            + INC_FECHA_FIN + " TEXT"
+//            + ", foreign key("+ INC_DNI +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
+//            + "ON DELETE CASCADE "
+//            + "ON UPDATE CASCADE, "
+//            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
             + ");";
 
     public ProyectoSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {

@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +31,7 @@ import java.io.File;
 
 public class AltaUsuario extends AppCompatActivity implements View.OnClickListener {
     private static final String TABLE_NAME = "usuario";
+    private static final String USER_ID = "id";
     private static final String USER_DNI = "dni";
     private static final String USER_NOM = "nombre";
     private static final String USER_AP = "apellidos";
@@ -61,7 +64,11 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
     private SQLiteDatabase db;
     private ContentValues querry;
 
-    //TODO: Recojer imagen al pulsar el boton y guardarla
+    /**
+     * 0 = Foto seleccionada desde camara
+     * 1 = Foto seleccionada desde galeria
+     */
+    private int camaraOgaleria = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +87,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
         rgPerfil = (RadioGroup) findViewById(R.id.rgPerfil);
         btnElegirImagen.setOnClickListener(this);
         btnInsertarUsuario.setOnClickListener(this);
+
     }
 
     @Override
@@ -125,7 +133,17 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
                     int perfil = (rbPerfilSeleccionado.getText().toString().equals("Admin")) ? 1 : 0;
                     args = new String[]{etDni.getText().toString()};
                     c = db.rawQuery(" SELECT * FROM " + TABLE_NAME + " WHERE "+USER_DNI+"=? ", args);
-                    if (c.getCount() == 0) {
+                    if (c.getCount() == 0 && camaraOgaleria != -1) {
+
+                        String ruta;
+                        // Recojer Uri de la imagen
+                        if(camaraOgaleria == 1){
+                            ruta = "file://"+RealPathUtil.getRealPath(this,miPath);
+
+                        }else{
+                            ruta = Uri.fromFile(fileImagen).toString();
+                        }
+                        querry.put(USER_FOTO,ruta);
                         querry.put(USER_DNI, etDni.getText().toString());
                         querry.put(USER_NOM, etNombre.getText().toString());
                         querry.put(USER_AP, etApellidos.getText().toString());
@@ -213,6 +231,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
             case COD_SELECCIONA:
                 miPath = data.getData();
                 ivPerfilUsuario.setImageURI(miPath);
+                camaraOgaleria = 1;
                 break;
 
             case COD_FOTO:
@@ -226,9 +245,11 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
 
                 bitmap = BitmapFactory.decodeFile(path);
                 ivPerfilUsuario.setImageBitmap(bitmap);
+                camaraOgaleria = 0;
 
                 break;
         }
+
 
     }
 }

@@ -31,6 +31,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     private Button btnFiltroIncidenciaVaciar;
 
     private static final String USER_TABLE_NAME = "usuario";
+    private static final String USER_ID = "id";
     private static final String USER_DNI = "dni";
     private static final String USER_NOM = "nombre";
     private static final String USER_AP = "apellidos";
@@ -40,6 +41,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     private static final String USER_FOTO = "foto";
 
     private static final String INC_TABLE_NAME = "incidencia";
+    private static final String INC_ID = "id";
     private static final String INC_DNI = "dni";
     private static final String INC_FECHA_INICIO = "fecha_inicio";
     private static final String INC_OBSER = "observacion";

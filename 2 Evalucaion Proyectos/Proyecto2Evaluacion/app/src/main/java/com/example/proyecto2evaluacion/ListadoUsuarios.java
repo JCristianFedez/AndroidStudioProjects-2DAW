@@ -30,6 +30,7 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
     private Button btnEliminarFiltro;
 
     private static final String USER_TABLE_NAME = "usuario";
+    private static final String USER_ID = "id";
     private static final String USER_DNI = "dni";
     private static final String USER_NOM = "nombre";
     private static final String USER_AP = "apellidos";
@@ -118,7 +119,7 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
                     + USER_TABLE_NAME + "." + USER_DNI + ", "
                     + USER_TABLE_NAME + "." + USER_PERFIL + ", "
                     + " Count(" + INC_TABLE_NAME + "." + INC_DNI + ") AS Incidencias,"
-                    + USER_TABLE_NAME + "." + USER_FOTO + ""
+                    + USER_TABLE_NAME + "." + USER_FOTO
                     + " FROM " + USER_TABLE_NAME
                     + " LEFT JOIN " + INC_TABLE_NAME + " ON " + INC_TABLE_NAME + "." + INC_DNI + "=" + USER_TABLE_NAME + "." +USER_DNI
                     + filtro
@@ -136,7 +137,7 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
                     int cant = c.getInt(3);
                     String uriFoto = c.getString(4);
                     String admin = (perfil==1)?"Administrador":"Usuario";
-                    listUsuarios.add(new ItemListview(R.drawable.ic_launcher_background,dni,nombre,admin,String.valueOf(cant)));
+                    listUsuarios.add(new ItemListview(uriFoto,dni,nombre,admin,String.valueOf(cant)));
                 }while(c.moveToNext());
                 adaptador = new Adaptador(this, listUsuarios);
                 lvListaUsuarios.setAdapter(adaptador);
@@ -167,8 +168,14 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
             if (c.getCount() != 0) {
                 db.delete(USER_TABLE_NAME, USER_DNI + "=?", args);
                 Toast.makeText(this, "Usuario con dni " + dni + " eliminado", Toast.LENGTH_SHORT).show();
+
+                //Elimino las incidencias que ha tenido el usuario
+                db.delete(INC_TABLE_NAME,INC_DNI + "=?",args);
+
+                //TODO: Comprobar si el usuaroi eliminado es Administrador que todaas las incidencias en las que es responsable se cambien a "Ninguno"
+
             } else {
-                Toast.makeText(this, "N existe ningun usuario con dicho DNI", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "No existe ningun usuario con dicho DNI", Toast.LENGTH_SHORT).show();
             }
             c.close();
             db.close();
