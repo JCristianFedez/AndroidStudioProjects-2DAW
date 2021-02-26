@@ -6,13 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ListadoIncidencia">
 
+    <Spinner
+        android:id="@+id/spFiltroEstado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toStartOf="@+id/spOrdenFecha"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spOrdenFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spFiltroEstado"
+        app:layout_constraintTop_toTopOf="@+id/spFiltroEstado" />
 
     <EditText
         android:id="@+id/etFiltroFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:background="@android:drawable/editbox_background_normal"
         android:clickable="true"
         android:ems="10"
@@ -21,19 +36,10 @@
         android:inputType="date"
         android:longClickable="false"
         android:padding="10dp"
-        app:layout_constraintEnd_toStartOf="@+id/spFiltroEstado"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/spFiltroEstado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/etFiltroFecha"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spOrdenFecha" />
+
 
     <Button
         android:id="@+id/btnFiltroIncidencia"
@@ -60,24 +66,27 @@
         app:layout_constraintTop_toTopOf="@+id/btnFiltroIncidencia" />
 
     <ScrollView
+        android:id="@+id/scViewListadoIncidencia"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnFiltroIncidencia">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tvListadoIncidencias"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp" />
         </LinearLayout>
     </ScrollView>

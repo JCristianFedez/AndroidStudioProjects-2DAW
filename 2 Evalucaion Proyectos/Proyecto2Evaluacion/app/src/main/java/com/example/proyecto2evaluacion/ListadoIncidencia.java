@@ -6,15 +6,16 @@ import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,11 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     private Cursor c;
     private ProyectoSQLiteHelper prdbh;
 
+    private ScrollView scViewListadoIncidencia;
     private TextView tvListadoIncidencias;
     private EditText etFiltroFecha;
     private Spinner spFiltroEstado;
+    private Spinner spOrdenFecha;
     private Button btnFiltroIncidencia;
     private Button btnFiltroIncidenciaVaciar;
 
@@ -56,7 +59,11 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         tvListadoIncidencias = (TextView) findViewById(R.id.tvListadoIncidencias);
+        tvListadoIncidencias.setMovementMethod(new ScrollingMovementMethod());
+
+        scViewListadoIncidencia = (ScrollView) findViewById(R.id.scViewListadoIncidencia);
         spFiltroEstado = (Spinner) findViewById(R.id.spFiltroEstado);
+        spOrdenFecha = (Spinner) findViewById(R.id.spOrdenFecha);
         etFiltroFecha = (EditText) findViewById(R.id.etFiltroFecha);
         btnFiltroIncidencia = (Button) findViewById(R.id.btnFiltroIncidencia);
         btnFiltroIncidenciaVaciar = (Button) findViewById(R.id.btnFiltroIncidenciaVaciar);
@@ -65,7 +72,20 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
         btnFiltroIncidencia.setOnClickListener(this);
         btnFiltroIncidenciaVaciar.setOnClickListener(this);
 
-        loadSpinnerData(spFiltroEstado);
+        spOrdenFecha.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                etFiltroFecha.setText("");
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        loadSpinnerDataEstado(spFiltroEstado);
+        loadSpinnerDataFecha(spOrdenFecha);
         mostrarDatos();
     }
 
@@ -73,6 +93,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.etFiltroFecha:
+                spOrdenFecha.setSelection(0);
                 showDatePickerDialog(etFiltroFecha);
                 break;
 
@@ -143,7 +164,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     /**
      * Funcion para cargar datos en el spinner desde la base de datos
      */
-    private void loadSpinnerData(Spinner spinner) {
+    private void loadSpinnerDataEstado(Spinner spinner) {
         ArrayList<String> list = new ArrayList<String>();
         list.add("Estado");
 
@@ -160,6 +181,28 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
                 list.add((c.getInt(0) == 1) ? "Resuelta" : "No Resuelta");//adding 1nd column data
             } while (c.moveToNext());
         }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
+                this, android.R.layout.simple_spinner_item, list
+        );
+
+        spinner.setAdapter(dataAdapter);
+
+        c.close();
+        db.close();
+
+    }
+
+
+    /**
+     * Funcion para cargar datos en el spinner desde la base de datos
+     */
+    private void loadSpinnerDataFecha(Spinner spinner) {
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("Fecha");
+
+        list.add("Ascendente");
+        list.add("Descendente");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, list
@@ -214,6 +257,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
     private void eliminarFiltro(){
         etFiltroFecha.setText("");
         spFiltroEstado.setSelection(0);
+        spOrdenFecha.setSelection(0);
     }
 
     private void showDatePickerDialog(final EditText editText) {
