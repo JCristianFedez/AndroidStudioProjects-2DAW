@@ -166,13 +166,21 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
             String[] args = new String[]{dni};
             c = db.rawQuery("SELECT * FROM " + USER_TABLE_NAME + " WHERE " + USER_DNI + "=? ", args);
             if (c.getCount() != 0) {
-                db.delete(USER_TABLE_NAME, USER_DNI + "=?", args);
-                Toast.makeText(this, "Usuario con dni " + dni + " eliminado", Toast.LENGTH_SHORT).show();
+
 
                 //Elimino las incidencias que ha tenido el usuario
                 db.delete(INC_TABLE_NAME,INC_DNI + "=?",args);
 
-                //TODO: Comprobar si el usuaroi eliminado es Administrador que todaas las incidencias en las que es responsable se cambien a "Ninguno"
+
+                //Si el usuario eliminado es responsable de alguna incidencia cambio el DNI de dicha incidencia a niguno
+                ContentValues cv = new ContentValues();
+                cv.put(INC_RESPONSABLE,"ninguno");
+                db.update(INC_TABLE_NAME,cv,INC_RESPONSABLE + "=?",args);
+
+
+                // Elimino al usuario
+                db.delete(USER_TABLE_NAME, USER_DNI + "=?", args);
+                Toast.makeText(this, "Usuario con dni " + dni + " eliminado", Toast.LENGTH_SHORT).show();
 
             } else {
                 Toast.makeText(this, "No existe ningun usuario con dicho DNI", Toast.LENGTH_SHORT).show();

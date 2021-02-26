@@ -113,7 +113,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
                     + INC_TABLE_NAME + "." + INC_ESTADO + ", "
                     + USER_TABLE_NAME + "." + USER_NOM
                     + " FROM " + INC_TABLE_NAME
-                    + " INNER JOIN " + USER_TABLE_NAME + " ON " + USER_TABLE_NAME + "." + USER_DNI + "=" + INC_TABLE_NAME + "." +INC_RESPONSABLE
+                    + " LEFT JOIN " + USER_TABLE_NAME + " ON " + USER_TABLE_NAME + "." + USER_DNI + "=" + INC_TABLE_NAME + "." +INC_RESPONSABLE
                     + filtro;
 
             c = db.rawQuery(queryConNombreUsuario, null);
