@@ -134,7 +134,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
                     + INC_TABLE_NAME + "." + INC_ESTADO + ", "
                     + USER_TABLE_NAME + "." + USER_NOM
                     + " FROM " + INC_TABLE_NAME
-                    + " LEFT JOIN " + USER_TABLE_NAME + " ON " + USER_TABLE_NAME + "." + USER_DNI + "=" + INC_TABLE_NAME + "." +INC_RESPONSABLE
+                    + " LEFT JOIN " + USER_TABLE_NAME + " ON " + USER_TABLE_NAME + "." + USER_DNI + "=" + INC_TABLE_NAME + "." + INC_RESPONSABLE
                     + filtro;
 
             c = db.rawQuery(queryConNombreUsuario, null);
@@ -168,28 +168,31 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
         ArrayList<String> list = new ArrayList<String>();
         list.add("Estado");
 
-        prdbh = new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
-        db = prdbh.getReadableDatabase();
+        // Cargar solo estados existentes
+//        prdbh = new ProyectoSQLiteHelper(this, "DBProyecto", null, 1);
+//        db = prdbh.getReadableDatabase();
+//
+//        c = db.rawQuery(
+//                "SELECT DISTINCT " + INC_ESTADO + " FROM " + INC_TABLE_NAME
+//                , null
+//        );
+//
+//        if (c.moveToFirst()) {
+//            do {
+//                list.add((c.getInt(0) == 1) ? "Resuelta" : "No Resuelta");//adding 1nd column data
+//            } while (c.moveToNext());
+//        }
 
-        c = db.rawQuery(
-                "SELECT DISTINCT " + INC_ESTADO + " FROM " + INC_TABLE_NAME
-                , null
-        );
-
-        if (c.moveToFirst()) {
-            do {
-                list.add((c.getInt(0) == 1) ? "Resuelta" : "No Resuelta");//adding 1nd column data
-            } while (c.moveToNext());
-        }
-
+        list.add("Resuelta");
+        list.add("No Resuelta");
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(
                 this, android.R.layout.simple_spinner_item, list
         );
 
         spinner.setAdapter(dataAdapter);
 
-        c.close();
-        db.close();
+//        c.close();
+//        db.close();
 
     }
 
@@ -210,8 +213,8 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
 
         spinner.setAdapter(dataAdapter);
 
-        c.close();
-        db.close();
+//        c.close();
+//        db.close();
 
     }
 
@@ -226,7 +229,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
         String filtro = "";
 
         String estado = spFiltroEstado.getSelectedItem().toString();
-
+        String orden = spOrdenFecha.getSelectedItem().toString();
         switch (estado) {
             case "Resuelta":
                 if (fechaFiltrar.equals("")) {
@@ -248,17 +251,34 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
                 }
         }
 
+        // PARTE DEL ORDEN DE LA FECHA
+        if(fechaFiltrar.equals("")){
+            filtro += " ORDER BY substr(" + INC_TABLE_NAME + "." + INC_FECHA_INICIO + ",7,4)||" +
+                    "substr(" + INC_TABLE_NAME + "." + INC_FECHA_INICIO + ",4,2)||" +
+                    "substr(" + INC_TABLE_NAME + "." + INC_FECHA_INICIO + ",1,2)";
+            switch(orden){
+                case "Ascendente":
+                    filtro += " ASC";
+                    break;
+                case "Descendente":
+                    filtro += "DESC";
+                    break;
+            }
+        }
+
+
         return filtro;
     }
 
     /**
      * Elimino el filtro
      */
-    private void eliminarFiltro(){
+    private void eliminarFiltro() {
         etFiltroFecha.setText("");
         spFiltroEstado.setSelection(0);
         spOrdenFecha.setSelection(0);
     }
+
 
     private void showDatePickerDialog(final EditText editText) {
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
