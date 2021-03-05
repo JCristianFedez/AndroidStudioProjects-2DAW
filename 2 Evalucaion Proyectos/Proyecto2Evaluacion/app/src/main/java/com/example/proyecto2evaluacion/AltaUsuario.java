@@ -4,7 +4,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,7 +80,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
         etUsuari = (EditText) findViewById(R.id.etUsuari);
         etPassword = (EditText) findViewById(R.id.etPassword);
         ivPerfilUsuario = (ImageView) findViewById(R.id.ivPerfilUsuario);
-        btnInsertarUsuario = (Button) findViewById(R.id.btnInsertarIncidencia);
+        btnInsertarUsuario = (Button) findViewById(R.id.btnInsertarRegistro);
         btnElegirImagen = (Button) findViewById(R.id.btnElegirImagen);
         rgPerfil = (RadioGroup) findViewById(R.id.rgPerfil);
         btnElegirImagen.setOnClickListener(this);
@@ -96,7 +94,7 @@ public class AltaUsuario extends AppCompatActivity implements View.OnClickListen
             case R.id.btnElegirImagen:
                 mostrarDialogoOpciones();
                 break;
-            case R.id.btnInsertarIncidencia:
+            case R.id.btnInsertarRegistro:
                 insertarUsuario();
                 break;
         }

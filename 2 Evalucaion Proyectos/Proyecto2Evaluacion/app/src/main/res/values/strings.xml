@@ -28,4 +28,11 @@
     <string name="Nombre">Nombre</string>
     <string name="dni">DNI</string>
     <string name="ivPerfilDescription">Imagen de perfil</string>
+    <string name="btnAltaRegistro">Alta Registro</string>
+    <string name="btnBuscadorRegistro">Buscar Regsitro</string>
+    <string name="etFecha">Fecha</string>
+    <string name="TvActivo">Marcar si el registro esta activo</string>
+    <string name="cbActivo">Activo</string>
+    <string name="btnInsertarRegistro">Alta Registro</string>
+    <string name="descripcion">Descripcion</string>
 </resources>

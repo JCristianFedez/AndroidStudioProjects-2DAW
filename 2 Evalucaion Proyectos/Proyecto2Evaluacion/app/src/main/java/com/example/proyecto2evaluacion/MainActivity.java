@@ -11,9 +11,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button btnListaUsuarios;
     private Button btnListaIncidencias;
+    private Button btnBuscadorRegistro;
     private Button btnAltaUsuario;
     private Button btnAltaIncidencia;
-
+    private Button btnAltaRegistro;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,13 +22,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btnListaUsuarios = (Button) findViewById(R.id.btnListaUsuarios);
         btnListaIncidencias = (Button) findViewById(R.id.btnListaIncidencias);
+        btnBuscadorRegistro = (Button) findViewById(R.id.btnBuscadorRegistro);
         btnAltaUsuario = (Button) findViewById(R.id.btnAltaUsuario);
         btnAltaIncidencia = (Button) findViewById(R.id.btnAltaIncidencia);
+        btnAltaRegistro = (Button) findViewById(R.id.btnAltaRegistro);
 
         btnListaUsuarios.setOnClickListener(this);
         btnListaIncidencias.setOnClickListener(this);
+        btnBuscadorRegistro.setOnClickListener(this);
         btnAltaUsuario.setOnClickListener(this);
         btnAltaIncidencia.setOnClickListener(this);
+        btnAltaRegistro.setOnClickListener(this);
+
     }
 
     @Override
@@ -38,16 +44,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, ListadoUsuarios.class);
                 startActivity(intent);
                 break;
+
             case R.id.btnListaIncidencias:
                 intent = new Intent(this, ListadoIncidencia.class);
                 startActivity(intent);
                 break;
+
+            case R.id.btnBuscadorRegistro:
+                intent = new Intent(this, BuscadorRegistro.class);
+                startActivity(intent);
+                break;
+
             case R.id.btnAltaUsuario:
                 intent = new Intent(this, AltaUsuario.class);
                 startActivity(intent);
                 break;
+
             case R.id.btnAltaIncidencia:
                 intent = new Intent(this, AltaIncidencia.class);
+                startActivity(intent);
+                break;
+
+            case R.id.btnAltaRegistro:
+                intent = new Intent(this, AltaRegistro.class);
                 startActivity(intent);
                 break;
         }

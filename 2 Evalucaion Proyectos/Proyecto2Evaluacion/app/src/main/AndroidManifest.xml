@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.proyecto2evaluacion">
+    <!-- Permisos para internet, la camara, escribir y leer en el almacenamiento local -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-<!--    Permisos para internet, la camara, escribir y leer en el almacenamiento local-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.camera"
+    <uses-feature
+        android:name="android.hardware.camera"
         android:required="true" />
 
     <application
@@ -25,11 +26,18 @@
             android:name=".AltaUsuario"
             android:parentActivityName=".MainActivity" />
         <activity
+            android:name=".AltaRegistro"
+            android:parentActivityName=".MainActivity"/>
+        <activity
             android:name=".ListadoUsuarios"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ListadoIncidencia"
             android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".BuscadorRegistro"
+            android:parentActivityName=".MainActivity"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -19,51 +19,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnListaUsuarios"
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#008A53"
-        android:text="@string/btnListaUsuarios"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAltaUsuario"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
-    <Button
-        android:id="@+id/btnListaIncidencias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#008A53"
-        android:text="@string/btnListaIncidencias"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnListaUsuarios"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnAltaUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="#008A53"
-        android:text="@string/btnAltaUsuario"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnAltaIncidencia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/btnListaUsuarios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnListaUsuarios"
+                app:cornerRadius="15dp" />
 
-    <Button
-        android:id="@+id/btnAltaIncidencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#008A53"
-        android:text="@string/btnAltaIncidencia"
-        app:cornerRadius="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+            <Button
+                android:id="@+id/btnBuscadorRegistro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnBuscadorRegistro"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/btnAltaUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnAltaUsuario"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/btnAltaIncidencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnAltaIncidencia"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/btnAltaRegistro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnAltaRegistro"
+                app:cornerRadius="15dp" />
+
+            <Button
+                android:id="@+id/btnListaIncidencias"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="clip_horizontal|center|clip_vertical"
+                android:layout_marginBottom="16dp"
+                android:backgroundTint="#008A53"
+                android:text="@string/btnListaIncidencias"
+                app:cornerRadius="15dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

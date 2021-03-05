@@ -58,7 +58,7 @@ public class ListadoIncidencia extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_listado_incidencias);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        tvListadoIncidencias = (TextView) findViewById(R.id.tvListadoIncidencias);
+        tvListadoIncidencias = (TextView) findViewById(R.id.tvListadoRegistros);
         tvListadoIncidencias.setMovementMethod(new ScrollingMovementMethod());
 
         scViewListadoIncidencia = (ScrollView) findViewById(R.id.scViewListadoIncidencia);

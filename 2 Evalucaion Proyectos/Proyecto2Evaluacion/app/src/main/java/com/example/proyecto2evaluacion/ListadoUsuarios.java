@@ -47,6 +47,14 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
     private static final String INC_ESTADO = "estado";
     private static final String INC_FECHA_FIN = "fecha_resolucion";
 
+    private static final String REG_TABLE_NAME = "registro";
+    private static final String REG_ID = "id";
+    private static final String REG_NOMBRE = "nombre";
+    private static final String REG_FECHA = "fecha";
+    private static final String REG_ID_USER = "id_usuario";
+    private static final String REG_DESC = "descripcion";
+    private static final String REG_ACTIVO = "activo";
+
     private Adaptador adaptador;
 
     @Override
@@ -168,9 +176,26 @@ public class ListadoUsuarios extends AppCompatActivity implements View.OnClickLi
             if (c.getCount() != 0) {
 
 
+                // Elimino los registros del administrador
+                int id = 0;
+                String querryIdUsuario = "SELECT "
+                        + USER_ID
+                        + " FROM " + USER_TABLE_NAME
+                        + " WHERE " + USER_DNI + "='" + dni +"'";
+
+                c = db.rawQuery(querryIdUsuario, null);
+                if (c.moveToFirst()) {
+                    do {
+                        id = c.getInt(0);
+                    } while (c.moveToNext());
+                }
+                String[] idMio = new String[]{String.valueOf(id)};
+                db.delete(REG_TABLE_NAME,REG_ID_USER + "=?", idMio);
+
+
+
                 //Elimino las incidencias que ha tenido el usuario
                 db.delete(INC_TABLE_NAME,INC_DNI + "=?",args);
-
 
                 //Si el usuario eliminado es responsable de alguna incidencia cambio el DNI de dicha incidencia a niguno
                 ContentValues cv = new ContentValues();

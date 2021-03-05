@@ -58,13 +58,13 @@ public class AltaIncidencia extends AppCompatActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        etDniIncidencia = (EditText) findViewById(R.id.etDniIncidencia);
-        etFechaInicio = (EditText) findViewById(R.id.etFechaInicio);
+        etDniIncidencia = (EditText) findViewById(R.id.etDniRegistroUsuario);
+        etFechaInicio = (EditText) findViewById(R.id.etFechaRegistro);
         etFechaFin = (EditText) findViewById(R.id.etFechaFin);
-        etObservaciones = (EditText) findViewById(R.id.etObservaciones);
-        etDniResponsable = (EditText) findViewById(R.id.etDniResponsable);
-        cbResuelta = (CheckBox) findViewById(R.id.cbResuelta);
-        btnInsertarIncidencia = (Button) findViewById(R.id.btnInsertarIncidencia);
+        etObservaciones = (EditText) findViewById(R.id.etNombreRegistro);
+        etDniResponsable = (EditText) findViewById(R.id.etDescripcionRegistro);
+        cbResuelta = (CheckBox) findViewById(R.id.cbActivo);
+        btnInsertarIncidencia = (Button) findViewById(R.id.btnInsertarRegistro);
 
         btnInsertarIncidencia.setOnClickListener(this);
         etFechaInicio.setOnClickListener(this);
@@ -75,7 +75,7 @@ public class AltaIncidencia extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.etFechaInicio:
+            case R.id.etFechaRegistro:
                 etFechaInicio.setText("");
                 showDatePickerDialog(etFechaInicio);
                 break;
@@ -85,7 +85,7 @@ public class AltaIncidencia extends AppCompatActivity implements View.OnClickLis
                 showDatePickerDialog(etFechaFin);
                 break;
 
-            case R.id.btnInsertarIncidencia:
+            case R.id.btnInsertarRegistro:
                 insertarIncidencia(v);
                 break;
         }

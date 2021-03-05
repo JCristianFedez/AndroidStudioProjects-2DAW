@@ -22,7 +22,7 @@
             android:padding="20dp">
 
             <EditText
-                android:id="@+id/etDniIncidencia"
+                android:id="@+id/etDniRegistroUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -39,7 +39,7 @@
             <!-- No permitir numeros           android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"-->
 
             <EditText
-                android:id="@+id/etFechaInicio"
+                android:id="@+id/etFechaRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -73,7 +73,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/etObservaciones"
+                android:id="@+id/etNombreRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -87,7 +87,7 @@
                 android:padding="10dp" />
 
             <EditText
-                android:id="@+id/etDniResponsable"
+                android:id="@+id/etDescripcionRegistro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -119,7 +119,7 @@
                     android:textSize="20sp" />
 
                 <CheckBox
-                    android:id="@+id/cbResuelta"
+                    android:id="@+id/cbActivo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -131,7 +131,7 @@
 
 
             <Button
-                android:id="@+id/btnInsertarIncidencia"
+                android:id="@+id/btnInsertarRegistro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

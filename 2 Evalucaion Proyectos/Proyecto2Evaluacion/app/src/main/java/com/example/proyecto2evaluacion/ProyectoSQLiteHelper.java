@@ -26,6 +26,14 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
     private static final String INC_ESTADO = "estado";
     private static final String INC_FECHA_FIN = "fecha_resolucion";
 
+    private static final String REG_TABLE_NAME = "registro";
+    private static final String REG_ID = "id";
+    private static final String REG_NOMBRE = "nombre";
+    private static final String REG_FECHA = "fecha";
+    private static final String REG_ID_USER = "id_usuario";
+    private static final String REG_DESC = "descripcion";
+    private static final String REG_ACTIVO = "activo";
+
     private SQLiteDatabase mDb;
 
     //NOTA: Al añadir la ID se me ha roto las forgein key
@@ -60,6 +68,18 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
 //            + "foreign key("+ INC_RESPONSABLE +") references "+ USER_TABLE_NAME +"("+ USER_DNI +")"
             + ");";
 
+    //SENTENCIA SQL CREAR TABLA Registro
+    private static final String CREATE_REG_TABLE = "create table "
+            + REG_TABLE_NAME + " ("
+            + REG_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + REG_NOMBRE + " TEXT,"
+            + REG_FECHA + " TEXT,"
+            + REG_ID_USER + " INTEGER,"
+            + REG_DESC + " TEXT,"
+            + REG_ACTIVO + " INTEGER"
+            + ");";
+
+
     public ProyectoSQLiteHelper(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -69,6 +89,7 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
         //Se ejecuta la sentencia SQL de creación de la tabla
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_INC_TABLE);
+        db.execSQL(CREATE_REG_TABLE);
     }
 
     // Sirve para poder usar las claves foraneas y las eliminaciones y actualizaciones en cascada
@@ -86,10 +107,13 @@ public class ProyectoSQLiteHelper extends SQLiteOpenHelper {
         //Se elimina la versión anterior de la tabla
         db.execSQL("DROP TABLE IF EXISTS " + USER_TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + INC_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + REG_TABLE_NAME);
+
 
         //Se crea la nueva versión de la tabla
         db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_INC_TABLE);
+        db.execSQL(CREATE_REG_TABLE);
     }
 
 }
