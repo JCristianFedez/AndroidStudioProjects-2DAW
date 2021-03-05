@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Proyecto2Evaluacion</string>
+    <string name="mensajeBienvenida">Bienvenido</string>
+    <string name="btnListaUsuarios">Listado de Usuarios</string>
+    <string name="btnListaIncidencias">Listado Incidencias</string>
+    <string name="btnAltaUsuario">Alta Usuario</string>
+    <string name="btnAltaIncidencia">Alta Incidencia</string>
+    <string name="etNombre">Nombre</string>
+    <string name="etApellidos">Apellidos</string>
+    <string name="etUsuari">Nombre Usuario</string>
+    <string name="etDni">Dni</string>
+    <string name="etPassword">Password</string>
+    <string name="tvPerfil">Perfil</string>
+    <string name="rbEstandar">Estandar</string>
+    <string name="rbAdmin">Admin</string>
+    <string name="etFechaInicio">Fecha de inicio</string>
+    <string name="etFechaFin">Fecha de resolucion</string>
+    <string name="etObservaciones">Observaciones</string>
+    <string name="etDniResponsable">Dni del responsable</string>
+    <string name="cbResuelta">Resuelta</string>
+    <string name="tvResuelta">Marque si la incidencia esta resuelta</string>
+    <string name="btnElegirImagen">Seleccione imagen</string>
+    <string name="etFiltroFecha">Fecha</string>
+    <string name="btnFiltro">Filtrar</string>
+    <string name="btnEliminarFiltro">ELiminar Filtro</string>
+    <string name="btnEliminar">ELiminar</string>
+    <string name="btnModificar">Modificar</string>
+    <string name="Nombre">Nombre</string>
+    <string name="dni">DNI</string>
+    <string name="ivPerfilDescription">Imagen de perfil</string>
+</resources>
